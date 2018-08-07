@@ -279,7 +279,7 @@ public class UICONTROLLER implements Initializable{
 		StudentMark st2 = new StudentMark("sdfsdf1");
 		StudentMark st3 = new StudentMark("1sdfsdf");
 		StudentMark st4 = new StudentMark("sdfsdf1");
-		StudentMark st5 = new StudentMark("1sdfsdg");
+		StudentMark st5 = new StudentMark("1sdfsd");
 
 		ObservableList<StudentMark> olist = FXCollections.observableArrayList(st1,st2,st3,st4,st5);
 		StudentMark_clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
