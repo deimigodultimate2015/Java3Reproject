@@ -1,0 +1,14 @@
+.button {
+	-fx-background-color: #212121;
+	-fx-background-radius: 130px;
+	-fx-opacity : 0;
+	-fx-cursor: hand;
+}
+
+.button: hover {
+	-fx-transition: 1000;
+	-fx-background-color: #212121;
+	-fx-background-radius: 130px;
+	-fx-opacity : 0.1;
+	-fx-cursor: hand;
+}
