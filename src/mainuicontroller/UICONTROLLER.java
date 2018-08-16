@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import model.StudentMark;
 
 public class UICONTROLLER implements Initializable{
@@ -40,253 +42,316 @@ public class UICONTROLLER implements Initializable{
     private Button Mmenu_btnChangeAvt;
 
     @FXML
-    private Pane pnMarkManage;
+    private Button btnExit;
 
     @FXML
-    private TableView<StudentMark> MarkManager_tblView;
+    private Pane TTSV_pane;
 
     @FXML
-    private TableColumn<StudentMark, String> StudentMark_clmName;
+    private TextField TTSV_txtfID;
 
     @FXML
-    private TextField MM_txtfID;
+    private TextField TTSV_txtfName;
 
     @FXML
-    private TextField MM_txtfFullname;
+    private TextField TTSV_txtfClass;
 
     @FXML
-    private TextField MM_txtfSJava;
+    private TextField TTSV_txtfEmail;
 
     @FXML
-    private TextField MM_txtfSGolang;
+    private TextField TTSV_txtfPhone;
 
     @FXML
-    private Button MM_btnClear;
+    private Button TTSV_btnAdd;
 
     @FXML
-    private TextField MM_txtfSJavaS;
+    private Button TTSV_btnUpdate;
 
     @FXML
-    private Button MM_btnUpdate;
+    private TableView<?> TTSV_tbl;
 
     @FXML
-    private Button MM_btnDelete;
+    private TableColumn<?, ?> TTSV_clmID;
 
     @FXML
-    private Label MM_lblAvgS;
+    private TableColumn<?, ?> TTSV_clmName;
 
     @FXML
-    private Label MM_lblEGolang;
+    private TableColumn<?, ?> TTSV_clmClass;
 
     @FXML
-    private Label MM_lblESJava;
+    private Button TTSV_btnFirst;
 
     @FXML
-    private Label MM_lblEJavaS;
+    private Button TTSV_btnPrev;
 
     @FXML
-    private Label MM_lblEFullname;
+    private Button TTSV_btnLast;
 
     @FXML
-    private Label MM_lblEID;
+    private Button TTSV_btnNext;
 
     @FXML
-    private Pane pnAccountInfo;
+    private TextField TTSV_txtfFilter;
 
     @FXML
-    private TextField AI_txtfEmail;
+    private ComboBox<?> TTSV_txtfCboxFilter;
 
     @FXML
-    private TextField AI_txtfPhone;
+    private Circle TTSV_ava;
 
     @FXML
-    private TextField AI_txtfPermission;
+    private Button TTSV_btnChangeAva;
 
     @FXML
-    private TextField AI_txtfFullname;
+    private Label TTSV_lblIDE;
 
     @FXML
-    private TextField AI_txtfID;
+    private Label TTSV_lblNameE;
 
     @FXML
-    private Button AI_btnUpdate;
+    private Label TTSV_lblEmailE;
 
     @FXML
-    private TextArea AI_txtaAddress;
+    private Label txtf_lblPhoneE;
 
     @FXML
-    private TextField AI_txtfOldPass;
+    private TextArea TTSV_txtaAddress;
 
     @FXML
-    private TextField AI_txtfReNewPass;
+    private RadioButton TTSV_rdbtnFemale;
 
     @FXML
-    private TextField AI_txtfNewPass;
+    private ToggleGroup TTSV_tgroup;
 
     @FXML
-    private Button AI_btnAcceptNewPass;
+    private RadioButton TTSV_rdbtnMale;
 
     @FXML
-    private Label AC_lblEID;
+    private Label TTSV_lblClassE;
 
     @FXML
-    private Label AC_lblEFullname;
+    private Pane DSV_pane;
 
     @FXML
-    private Label AC_lblEAddress;
+    private TextField DSV_txtfID;
 
     @FXML
-    private Label AC_lblEPhone;
+    private TextField DSV_txtfName;
 
     @FXML
-    private Label AC_lblEEmail;
+    private TextField DSV_txtfJS;
 
     @FXML
-    private Label AC_lblEOldPass;
+    private TextField DSV_txtfJava;
 
     @FXML
-    private Label AC_lblENewPass;
+    private TextField DSV_txtfGo;
 
     @FXML
-    private Pane pnSInfoManage;
+    private Button DSV_btnUpdate;
 
     @FXML
-    private TextField SM_txtfID;
+    private Button DSV_btnRefresh;
 
     @FXML
-    private TextField SM_txtfFullname;
+    private TableView<?> DSV_tbl;
 
     @FXML
-    private TextField SM_txtfEmail;
+    private TableColumn<?, ?> DSV_clmID;
 
     @FXML
-    private TextField SM_txtfPhone;
+    private TableColumn<?, ?> DSV_clmName;
 
     @FXML
-    private TextField SM_txtfClass;
+    private TableColumn<?, ?> DSV_clmAve;
 
     @FXML
-    private TextArea SM_txtaAddress;
+    private Button DSV_btnFirst;
 
     @FXML
-    private Button SM_btnUpdate;
+    private Button DSV_btnPrev;
 
     @FXML
-    private Button SM_btnClear;
+    private Button DSV_btnLast;
 
     @FXML
-    private Button SM_btnAdd;
+    private Button DSV_btnNext;
 
     @FXML
-    private Button SM_btnDelete;
+    private TextField DSV_txtfFilter;
 
     @FXML
-    private RadioButton SM_rdbtnFemale;
+    private ComboBox<?> DSV_cboxFilter;
 
     @FXML
-    private ToggleGroup SM_tggr;
+    private Label DSV_lblAve;
 
     @FXML
-    private RadioButton SM_rdbtnMale;
+    private Pane TTND_Pane;
 
     @FXML
-    private Label SM_lblEID;
+    private TextField TTND_txtfName;
 
     @FXML
-    private Label SM_lblFullname;
+    private TextField TTND_txtfRole;
 
     @FXML
-    private Label SM_lblEClass;
+    private TextField TTND_txtfClass;
 
     @FXML
-    private Label SM_lblEEmail;
+    private TextField TTND_txtfEmail;
 
     @FXML
-    private Label SM_lblEPhone;
+    private TextField TTND_txtfPhone;
 
     @FXML
-    private Label SM_lblEAddress;
+    private Button TTND_btnRefresh;
 
     @FXML
-    private Pane pnAccountManage;
+    private Button TTND_btnUpdate;
 
     @FXML
-    private TextField AM_txtfEmail;
+    private TableView<?> TTND_tbl;
 
     @FXML
-    private TextField AM_txtfPhone;
+    private TableColumn<?, ?> TTND_clmID;
 
     @FXML
-    private TextField AM_txtfClass;
+    private TableColumn<?, ?> TTND_clmName;
 
     @FXML
-    private TextField AM_txtfPermission;
+    private TableColumn<?, ?> TTND_clmEmail;
 
     @FXML
-    private TextField AM_txtfFullname;
+    private Button TTND_btnFIrst;
 
     @FXML
-    private TextField AM_txtfID;
+    private Button TTND_btnPrev;
 
     @FXML
-    private Button AM_btnUpdate;
+    private Button TTND_btnLast;
 
     @FXML
-    private TextArea AM_txtaAddress;
+    private Button TTND_btnNext;
 
     @FXML
-    private Button AM_btnClear;
+    private TextField TTND_txtfFilter;
 
     @FXML
-    private Button AM_btnAdd;
+    private ComboBox<?> TTND_cboxFilter;
 
     @FXML
-    private RadioButton AM_rdbtnFemale;
+    private Label TTND_lblRoleE;
 
     @FXML
-    private ToggleGroup AM_tggr;
+    private Label TTND_lblPhoneE;
 
     @FXML
-    private RadioButton AM_rdbtnMale;
+    private TextArea TTND_txtaAddress;
 
     @FXML
-    private Button AM_btnDelete;
+    private RadioButton TTND_rdbtnFemale;
 
     @FXML
-    private Label AM_lblEID;
+    private ToggleGroup TTND_tgroup;
 
     @FXML
-    private Label AM_lblEFullname;
+    private RadioButton TTND_rdbtnMale;
 
     @FXML
-    private Label AM_lblEPermission;
+    private TextField TTND_txtfID;
 
     @FXML
-    private Label AM_lblEClass;
+    private Label TTND_lblNameE;
 
     @FXML
-    private Label AM_lblEPhone;
+    private Label TTND_lblIDE;
 
     @FXML
-    private Label AM_lblEEmail;
+    private Label TTND_lblEmailE;
 
     @FXML
-    private Label AM_lblEAddress;
+    private Pane TTTK_pane;
+
+    @FXML
+    private TextField TTTK_txtfID;
+
+    @FXML
+    private TextField TTTK_txtfName;
+
+    @FXML
+    private TextField TTTK_txtfRole;
+
+    @FXML
+    private TextField TTTK_txtfEmail;
+
+    @FXML
+    private TextField TTTK_txtfPhone;
+
+    @FXML
+    private Button TTTK_btnUpdate;
+
+    @FXML
+    private Button TTTK_btnRefresh;
+
+    @FXML
+    private Label TTTK_lblNameE;
+
+    @FXML
+    private Label TTTK_lblIDE;
+
+    @FXML
+    private Label TTTK_lblEmailE;
+
+    @FXML
+    private Label TTTK_lblPhoneE;
+
+    @FXML
+    private TextArea TTTK_txtaAddress;
+
+    @FXML
+    private RadioButton TTTK_rdbtnFemale;
+
+    @FXML
+    private ToggleGroup TTTK_tgroup;
+
+    @FXML
+    private RadioButton TTTK_rdbtnMale;
+
+    @FXML
+    private Label TTTK_lblRoleE;
+
+    @FXML
+    private TextField TTTK_txtfOldPass;
+
+    @FXML
+    private TextField TTTK_txtfNewPass;
+
+    @FXML
+    private TextField TTTK_txtfReNewPass;
+
+    @FXML
+    private Button TTTK_btnUpdatePass;
+
+    @FXML
+    private Button TTTK_btnNewPass;
+
+    @FXML
+    private Label TTTK_lblNewPassE;
+
+    @FXML
+    private Label TTTK_lblIDE12;
+
+    @FXML
+    private Label TTTK_lblOldPassE;
+
+    @FXML
+    private Label TTTK_lblRePassE;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		StudentMark st1 = new StudentMark("1sdfsdf");
-		StudentMark st2 = new StudentMark("sdfsdf1");
-		StudentMark st3 = new StudentMark("1sdfsdf");
-		StudentMark st4 = new StudentMark("sdfsdf1");
-		StudentMark st5 = new StudentMark("1sdfsd");
-
-		ObservableList<StudentMark> olist = FXCollections.observableArrayList(st1,st2,st3,st4,st5);
-		StudentMark_clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		
-		MarkManager_tblView.setItems(olist);
-		
-		
 		Mmenu_btnAccountInfo.setOnMousePressed(e -> {
 			Mmenu_btnAccountInfo.setStyle("-fx-background-color: #98869E");
 			Mmenu_MarkManage.setStyle(null);
@@ -317,38 +382,38 @@ public class UICONTROLLER implements Initializable{
 		
 		Mmenu_btnAccountInfo.setOnAction(e -> {
 			DisableAllPane();
-			pnAccountInfo.setDisable(false);
-			pnAccountInfo.setVisible(true);
+			TTTK_pane.setDisable(false);
+			TTTK_pane.setVisible(true);
 		});
 		
 		Mmenu_SInfoManage.setOnAction(e -> {
 			DisableAllPane();
-			pnSInfoManage.setDisable(false);
-			pnSInfoManage.setVisible(true);
+			TTSV_pane.setDisable(false);
+			TTSV_pane.setVisible(true);
 		});
 		
 		Mmenu_MarkManage.setOnAction(e -> {
 			DisableAllPane();
-			pnMarkManage.setDisable(false);
-			pnMarkManage.setVisible(true);
+			DSV_pane.setDisable(false);
+			DSV_pane.setVisible(true);
 		});
 		
 		Mmenu_UserManage.setOnAction(e -> {
 			DisableAllPane();
-			pnAccountManage.setDisable(false);
-			pnAccountManage.setVisible(true);
+			TTND_Pane.setDisable(false);
+			TTND_Pane.setVisible(true);
 		});
 	}
 	
 	public void DisableAllPane() {
-		pnAccountInfo.setDisable(true);
-		pnAccountInfo.setVisible(false);
-		pnSInfoManage.setDisable(true);
-		pnSInfoManage.setVisible(false);
-		pnMarkManage.setDisable(true);
-		pnMarkManage.setVisible(false);
-		pnAccountManage.setDisable(true);
-		pnAccountManage.setVisible(false);
+		TTTK_pane.setDisable(true);
+		TTTK_pane.setVisible(false);
+		TTSV_pane.setDisable(true);
+		TTSV_pane.setVisible(false);
+		DSV_pane.setDisable(true);
+		DSV_pane.setVisible(false);
+		TTND_Pane.setDisable(true);
+		TTND_Pane.setVisible(false);
 	}
 	
 	public void resetBtnMmenuToDefault() {
