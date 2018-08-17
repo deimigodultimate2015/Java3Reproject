@@ -136,7 +136,6 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TTSV_txtfClass" layoutX="167.0" layoutY="304.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="305.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Lớp" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
@@ -203,7 +202,7 @@
                   <Label fx:id="TTSV_lblNameE" alignment="CENTER" layoutX="17.0" layoutY="280.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTSV_lblEmailE" alignment="CENTER" layoutX="17.0" layoutY="380.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="txtf_lblPhoneE" alignment="CENTER" layoutX="17.0" layoutY="430.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
-                  <TextArea fx:id="TTSV_txtaAddress" layoutX="167.0" layoutY="498.0" prefHeight="14.0" prefWidth="200.0" stylesheets="@UI1CSS.css" text="sdfsdfsdfsdf&#10;" />
+                  <TextArea fx:id="TTSV_txtaAddress" layoutX="167.0" layoutY="498.0" prefHeight="14.0" prefWidth="200.0" stylesheets="@UI1CSS.css" text="&#10;" />
                   <RadioButton fx:id="TTSV_rdbtnFemale" layoutX="179.0" layoutY="459.0" mnemonicParsing="false" text="Female">
                      <toggleGroup>
                         <ToggleGroup fx:id="TTSV_tgroup" />
@@ -211,6 +210,7 @@
                   </RadioButton>
                   <RadioButton fx:id="TTSV_rdbtnMale" layoutX="255.0" layoutY="459.0" mnemonicParsing="false" text="Not Female" toggleGroup="$TTSV_tgroup" />
                   <Label fx:id="TTSV_lblClassE" alignment="CENTER" layoutX="17.0" layoutY="330.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
+                  <ComboBox fx:id="TTSV_cboxClass" layoutX="167.0" layoutY="304.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
                </children>
             </Pane>
             <Pane fx:id="DSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
@@ -294,7 +294,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
+            <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
                <children>
                   <TextField fx:id="TTND_txtfName" layoutX="167.0" layoutY="149.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Họ à tên" textFill="WHITE">
@@ -302,13 +302,11 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TTND_txtfRole" layoutX="167.0" layoutY="199.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="200.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Quyền truy cập" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TTND_txtfClass" layoutX="167.0" layoutY="249.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="250.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Lớp" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
@@ -366,9 +364,9 @@
                      </padding>
                   </Label>
                   <Label fx:id="TTND_lblRoleE" alignment="CENTER" layoutX="17.0" layoutY="225.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
-                  <Label alignment="CENTER" layoutX="17.0" layoutY="280.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
+                  <Label alignment="CENTER" layoutX="17.0" layoutY="275.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTND_lblPhoneE" alignment="CENTER" layoutX="25.0" layoutY="375.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
-                  <TextArea fx:id="TTND_txtaAddress" layoutX="167.0" layoutY="443.0" prefHeight="14.0" prefWidth="200.0" stylesheets="@UI1CSS.css" text="sdfsdfsdfsdf&#10;" />
+                  <TextArea fx:id="TTND_txtaAddress" layoutX="167.0" layoutY="443.0" prefHeight="14.0" prefWidth="200.0" stylesheets="@UI1CSS.css" />
                   <RadioButton fx:id="TTND_rdbtnFemale" layoutX="179.0" layoutY="404.0" mnemonicParsing="false" text="Female">
                      <toggleGroup>
                         <ToggleGroup fx:id="TTND_tgroup" />
@@ -385,9 +383,11 @@
                   <Label fx:id="TTND_lblNameE" alignment="CENTER" layoutX="17.0" layoutY="175.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTND_lblIDE" alignment="CENTER" layoutX="17.0" layoutY="125.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTND_lblEmailE" alignment="CENTER" layoutX="17.0" layoutY="325.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
+                  <ComboBox fx:id="TTND_cboxRole" layoutX="167.0" layoutY="199.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
+                  <ComboBox fx:id="TTND_cboxClass" layoutX="167.0" layoutY="249.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
                </children>
             </Pane>
-            <Pane fx:id="TTTK_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
+            <Pane fx:id="TTTK_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
                <children>
                   <TextField fx:id="TTTK_txtfID" layoutX="167.0" layoutY="124.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Người dùng" textFill="WHITE">
@@ -401,7 +401,6 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TTTK_txtfRole" layoutX="167.0" layoutY="224.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Quyền truy cập" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
@@ -441,13 +440,13 @@
                   <Label fx:id="TTTK_lblIDE" alignment="CENTER" layoutX="17.0" layoutY="150.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTTK_lblEmailE" alignment="CENTER" layoutX="17.0" layoutY="299.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTTK_lblPhoneE" alignment="CENTER" layoutX="17.0" layoutY="350.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
-                  <TextArea fx:id="TTTK_txtaAddress" layoutX="167.0" layoutY="418.0" prefHeight="14.0" prefWidth="340.0" stylesheets="@UI1CSS.css" text="sdfsdfsdfsdf&#10;" />
-                  <RadioButton fx:id="TTTK_rdbtnFemale" layoutX="179.0" layoutY="379.0" mnemonicParsing="false" text="Female">
+                  <TextArea fx:id="TTTK_txtaAddress" layoutX="167.0" layoutY="418.0" prefHeight="14.0" prefWidth="340.0" stylesheets="@UI1CSS.css" />
+                  <RadioButton fx:id="TTTK_rdbtnFemale" layoutX="179.0" layoutY="379.0" mnemonicParsing="false" text="Nữ">
                      <toggleGroup>
                         <ToggleGroup fx:id="TTTK_tgroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="TTTK_rdbtnMale" layoutX="255.0" layoutY="379.0" mnemonicParsing="false" text="Not Female" toggleGroup="$TTTK_tgroup" />
+                  <RadioButton fx:id="TTTK_rdbtnMale" layoutX="255.0" layoutY="379.0" mnemonicParsing="false" text="Nam" toggleGroup="$TTTK_tgroup" />
                   <Label fx:id="TTTK_lblRoleE" alignment="CENTER" layoutX="17.0" layoutY="250.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label alignment="CENTER" layoutX="532.0" layoutY="22.0" prefHeight="47.0" prefWidth="510.0" style="-fx-border-color: #564B6F; -fx-border-width: 0 0 2 0;" text="Thay đổi mật khẩu" textFill="#564b6f">
                      <font>
@@ -478,6 +477,7 @@
                   <Label fx:id="TTTK_lblIDE12" alignment="CENTER" layoutX="553.0" layoutY="250.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTTK_lblOldPassE" alignment="CENTER" layoutX="553.0" layoutY="150.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTTK_lblRePassE" alignment="CENTER" layoutX="553.0" layoutY="250.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
+                  <ComboBox fx:id="TTTK_cboxRole" layoutX="167.0" layoutY="224.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
                </children>
             </Pane>
          </children>

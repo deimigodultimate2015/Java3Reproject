@@ -3,8 +3,6 @@ package mainuicontroller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,10 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import model.StudentMark;
 
 public class UICONTROLLER implements Initializable{
 
@@ -52,9 +48,6 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TextField TTSV_txtfName;
-
-    @FXML
-    private TextField TTSV_txtfClass;
 
     @FXML
     private TextField TTSV_txtfEmail;
@@ -132,6 +125,9 @@ public class UICONTROLLER implements Initializable{
     private Label TTSV_lblClassE;
 
     @FXML
+    private ComboBox<?> TTSV_cboxClass;
+
+    @FXML
     private Pane DSV_pane;
 
     @FXML
@@ -193,12 +189,6 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TextField TTND_txtfName;
-
-    @FXML
-    private TextField TTND_txtfRole;
-
-    @FXML
-    private TextField TTND_txtfClass;
 
     @FXML
     private TextField TTND_txtfEmail;
@@ -273,6 +263,12 @@ public class UICONTROLLER implements Initializable{
     private Label TTND_lblEmailE;
 
     @FXML
+    private ComboBox<?> TTND_cboxRole;
+
+    @FXML
+    private ComboBox<?> TTND_cboxClass;
+
+    @FXML
     private Pane TTTK_pane;
 
     @FXML
@@ -280,9 +276,6 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TextField TTTK_txtfName;
-
-    @FXML
-    private TextField TTTK_txtfRole;
 
     @FXML
     private TextField TTTK_txtfEmail;
@@ -349,9 +342,17 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private Label TTTK_lblRePassE;
+
+    @FXML
+    private ComboBox<?> TTTK_cboxRole;
+    
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
+		//------------------------------Below is UI part----------------------------------//
+		btnExit.setOnAction(e -> {System.exit(0);});
 		Mmenu_btnAccountInfo.setOnMousePressed(e -> {
 			Mmenu_btnAccountInfo.setStyle("-fx-background-color: #98869E");
 			Mmenu_MarkManage.setStyle(null);
@@ -403,6 +404,102 @@ public class UICONTROLLER implements Initializable{
 			TTND_Pane.setDisable(false);
 			TTND_Pane.setVisible(true);
 		});
+		
+		//--------------------Below is TTTK button part----------------------------//
+		
+		TTTK_btnRefresh.setOnAction(e -> {
+			TTTK_txtfID.setText("");
+			TTTK_txtfName.setText("");
+			TTTK_txtfEmail.setText("");
+			TTTK_txtfPhone.setText("");
+			TTTK_txtaAddress.setText("");
+			
+		});
+		
+		TTTK_btnNewPass.setOnAction(e -> {
+			TTTK_txtfOldPass.setText("");
+			TTTK_txtfNewPass.setText("");
+			TTTK_txtfReNewPass.setText("");
+		});
+		
+		TTTK_btnUpdate.setOnAction( e-> {
+			TTTK_lblIDE.setText("");
+			TTTK_lblNameE.setText("");
+			TTTK_lblEmailE.setText("");
+			TTTK_lblPhoneE.setText("");
+			if(TTTK_txtfName.getText().isEmpty()) {
+				TTTK_lblNameE.setText("Tên không được để trống");
+				return;
+			} else if(TTTK_txtfEmail.getText().isEmpty()) {
+				TTTK_lblEmailE.setText("Email không được để trống");
+				return;
+			} else if (!TTTK_txtfEmail.getText().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+				TTTK_lblEmailE.setText("Email không đúng định dạng");
+				return;
+			} else if(TTTK_txtfPhone.getText().isEmpty()) {
+				TTTK_lblPhoneE.setText("Số điện thoại không được để trống");
+				return;
+			} else if (!TTTK_txtfPhone.getText().matches("[0-9]*")) {
+				TTTK_lblPhoneE.setText("Số điện thoại chỉ được chứa số");
+				return;
+			}
+			
+		});
+		
+		TTTK_btnUpdatePass.setOnAction(e -> {
+			TTTK_lblOldPassE.setText("");
+			TTTK_lblNewPassE.setText("");
+			TTTK_lblRePassE.setText("");
+			
+			if(TTTK_txtfOldPass.getText().isEmpty()) {
+				TTTK_lblOldPassE.setText("Password hiện tại không được để trống");
+				return;
+			} else if (TTTK_txtfNewPass.getText().isEmpty()) {
+				TTTK_lblNewPassE.setText("Password mới không được để trống");
+				return;
+			} else if(TTTK_txtfReNewPass.getText().isEmpty()) {
+				TTTK_lblRePassE.setText("Bắt buộc nhập lại password");
+				return;
+			} else if(!TTTK_txtfNewPass.getText().equals(TTTK_txtfOldPass.getText())) {
+				TTTK_lblRePassE.setText("Password không khớp với password trên");
+				return;
+			}
+		});
+		
+		//---------Below is TTND button part----------//
+		
+		TTND_btnUpdate.setOnAction(e -> {
+			TTND_lblIDE.setText("");
+			TTND_lblNameE.setText("");
+			TTND_lblEmailE.setText("");
+			TTND_lblPhoneE.setText("");
+			if(TTND_txtfName.getText().isEmpty()) {
+				TTND_lblNameE.setText("Tên không được để trống");
+				return;
+			} else if (TTND_txtfEmail.getText().isEmpty()) {
+				TTND_lblEmailE.setText("Email không được để trống");
+				return;
+			} else if(!TTND_txtfEmail.getText().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+				TTND_lblEmailE.setText("Email không đúng định dạng");
+				return;
+			} else if(!TTND_txtfPhone.getText().matches("\\d*")) {
+				TTND_lblPhoneE.setText("Số điện thoại chỉ được chứa số");
+			} else if(TTND_txtfPhone.getText().isEmpty()) {
+				TTND_lblPhoneE.setText("Số điện thoại không được để trống");
+			}
+		});
+		
+		TTND_btnRefresh.setOnAction(e -> {
+			TTND_txtfID.setText("");
+			TTND_txtfName.setText("");
+			TTND_txtfEmail.setText("");
+			TTND_txtfPhone.setText("");
+			TTND_txtaAddress.setText("");
+		});
+		
+		//-------Below is DSV button part----------//
+		
+	
 	}
 	
 	public void DisableAllPane() {
@@ -422,5 +519,7 @@ public class UICONTROLLER implements Initializable{
 		Mmenu_SInfoManage.setStyle(null);
 		Mmenu_UserManage.setStyle(null);
 	}
+	
+	
 
 }

@@ -41,7 +41,7 @@ public class UISIGNIN implements Initializable{
 			System.exit(0);
 		});
 		btnExit.setOnMouseEntered(e -> {
-			Image img = new Image("signincontroller\\uhm.png");
+			Image img = new Image(getClass().getResourceAsStream("uhm.png"));
 			UI1M.getScene().setCursor(new ImageCursor(img));
 		});
 		btnExit.setOnMouseExited(e -> {
