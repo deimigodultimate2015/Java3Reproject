@@ -98,7 +98,7 @@ public class StudentModel {
             stmt.setString(5, phone);
             stmt.setString(6, address);
             stmt.setString(7, img);
-
+            System.out.println(img);
             stmt.setString(8, id);
             stmt.executeUpdate();
             return true;

@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -110,9 +111,6 @@ public class UICONTROLLER implements Initializable{
     private TextField TTSV_txtfFilter;
 
     @FXML
-    private ComboBox<String> TTSV_txtfCboxFilter;
-
-    @FXML
     private Circle TTSV_ava;
 
     @FXML
@@ -197,9 +195,6 @@ public class UICONTROLLER implements Initializable{
     private TextField DSV_txtfFilter;
 
     @FXML
-    private ComboBox<String> DSV_cboxFilter;
-
-    @FXML
     private Label DSV_lblNameE;
 
     @FXML
@@ -260,9 +255,6 @@ public class UICONTROLLER implements Initializable{
     private TextField TTND_txtfFilter;
 
     @FXML
-    private ComboBox<String> TTND_cboxFilter;
-
-    @FXML
     private Label TTND_lblRoleE;
 
     @FXML
@@ -294,9 +286,6 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private ComboBox<String> TTND_cboxRole;
-
-    @FXML
-    private ComboBox<String> TTND_cboxClass;
 
     @FXML
     private Pane TTTK_pane;
@@ -376,6 +365,8 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private ComboBox<String> TTTK_cboxRole;
     
+    String TTSV_currentImg;
+    String TTTK_currentImg;
     
     private User useing ;
     
@@ -459,7 +450,7 @@ public class UICONTROLLER implements Initializable{
 		for(StudyClass sclass : StudyClassModel.getAll()) {
 			olistClass.add(sclass.getId());
 		}
-
+		
 	    
 	    MenuItem TTSV_ite1 = new MenuItem("Delete this student");
 	    ContextMenu TTSV_cmenu = new ContextMenu();
@@ -484,7 +475,7 @@ public class UICONTROLLER implements Initializable{
 		
 		TTSV_btnChangeAva.setOnAction(e -> {
 			try {
-				TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage())));
+				TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTSV_currentImg)));
 			} catch(Exception ex) {
 				ex.printStackTrace();
 				TTSV_ava.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
@@ -496,12 +487,13 @@ public class UICONTROLLER implements Initializable{
 		TTSV_clmClass.setCellValueFactory(new PropertyValueFactory<Student, String>("classId"));
 		TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
 		TTSV_btnAdd.setOnAction(e -> {
-			StudentModel.insertInfo(TTSV_txtfID.getText(), TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), "");
+			StudentModel.insertInfo(TTSV_txtfID.getText(), TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?false:true, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), TTSV_currentImg);
+			System.out.println(TTSV_ava.toString());
 			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
 			TTSV_tbl.refresh();
 		});
 		TTSV_btnUpdate.setOnAction(e -> {
-			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), TTSV_txtfID.getText(), "");
+			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtaAddress.getText(), TTSV_txtfPhone.getText(),TTSV_currentImg, TTSV_txtfID.getText());
 			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
 			TTSV_tbl.refresh();
 		});
@@ -511,6 +503,7 @@ public class UICONTROLLER implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if(newValue!= null) {
+					System.out.println(newValue.getImage());
 					TTSV_txtfID.setText(newValue.getId());
 					TTSV_txtfName.setText(newValue.getName());
 					TTSV_cboxClass.getSelectionModel().select(newValue.getClassId());
@@ -518,6 +511,12 @@ public class UICONTROLLER implements Initializable{
 					TTSV_txtfPhone.setText(newValue.getPhoneNumber());
 					TTSV_txtaAddress.setText(newValue.getAddress());
 					if(newValue.getSex()) TTSV_rdbtnMale.setSelected(true); else TTSV_rdbtnFemale.setSelected(true);
+					try {
+						TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(newValue.getImage())));
+					} catch(Exception ex) {
+						ex.printStackTrace();
+						TTSV_ava.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
+					}
 
 				}
 			}
@@ -616,7 +615,7 @@ public class UICONTROLLER implements Initializable{
 		
 		Mmenu_btnChangeAvt.setOnAction(e -> {
 			try {
-				Mmenu_avt.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage())));
+				Mmenu_avt.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTTK_currentImg)));
 			} catch(Exception ex) {
 				ex.printStackTrace();
 				Mmenu_avt.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
@@ -624,6 +623,7 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		//---------Below is TTND button part----------//
+		TTND_txtfID.setEditable(false);
 		TTND_cboxRole.setEditable(false);
 		TTND_tbl.setItems(FXCollections.observableArrayList(UserModel.getAll()));
 		TTND_clmID.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
@@ -651,27 +651,36 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		TTND_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-
 			@Override
 			public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-				TTND_txtfID.setText("");
-				TTND_txtfName.setText("");
-				TTND_cboxRole.getSelectionModel().select("");
-				TTND_cboxClass.getSelectionModel().select("");
-				TTND_txtfEmail.setText("");
-				TTND_txtfPhone.setText("");
-				TTND_txtaAddress.setText("");
-				if(newValue.getSex()) TTND_rdbtnMale.setSelected(true); else TTND_rdbtnFemale.setSelected(true);
+				if(newValue != null) {
+					TTND_txtfID.setText(newValue.getId());
+					TTND_txtfName.setText(newValue.getName());
+					TTND_cboxRole.getSelectionModel().select(newValue.getPermission());
+//					TTND_cboxClass.getSelectionModel().select(newValue.get);
+					TTND_txtfEmail.setText(newValue.getEmail());
+					TTND_txtfPhone.setText(newValue.getPhoneNumber());
+					TTND_txtaAddress.setText(newValue.getAddress());
+					if(newValue.getSex()) TTND_rdbtnMale.setSelected(true); else TTND_rdbtnFemale.setSelected(true);
+				}
 			}
 			
 		});
 		
 		TTND_btnRefresh.setOnAction(e -> {
-			TTND_txtfID.setText("");
 			TTND_txtfName.setText("");
 			TTND_txtfEmail.setText("");
 			TTND_txtfPhone.setText("");
 			TTND_txtaAddress.setText("");
+		});
+		
+		TTND_btnUpdate.setOnAction(e -> {
+			User oldVl = TTND_tbl.getSelectionModel().getSelectedItem();
+			User user = new User(TTND_txtfID.getText(),oldVl.getPassword() , TTND_txtfName.getText(),  TTSV_rdbtnFemale.isSelected()?false:true , TTND_txtfEmail.getText(), TTND_txtfPhone.getText(), TTND_txtaAddress.getText(), oldVl.getPermission(), oldVl.getImage());
+			UserModel.update(user);
+			TTND_tbl.setItems(FXCollections.observableArrayList(UserModel.getAll()));
+			TTND_tbl.refresh();
+			
 		});
 		
 		//-------Below is DSV button part----------//
