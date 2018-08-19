@@ -4,11 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controller.signin.UISIGNIN;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -96,7 +98,6 @@ public class UICONTROLLER implements Initializable{
     private TableColumn<Student, String> TTSV_clmClass;
 
   
-
     @FXML
     private Circle TTSV_ava;
 
@@ -212,7 +213,9 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TableColumn<User, String> TTND_clmEmail;
-
+    
+    @FXML
+    private TextField TTSV_txtfFilter;
    
     @FXML
     private Label TTND_lblRoleE;
@@ -325,8 +328,14 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private ComboBox<String> TTTK_cboxRole;
     
-    String TTSV_currentImg;
-    String TTTK_currentImg;
+    @FXML
+    private TextField TTND_txtfFilter;
+    
+    @FXML
+    private TextField DSV_txtfFilter;
+    
+    @FXML
+    private TableColumn<Student, String> DSV_clmTB;
     
     private User useing ;
     
@@ -337,7 +346,10 @@ public class UICONTROLLER implements Initializable{
 	public void setUseing(User useing) {
 		this.useing = useing;
 	}
-
+	
+	ObservableList<Student> olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
+	ObservableList<User> olistTTND = FXCollections.observableArrayList(UserModel.getAll());
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -435,27 +447,72 @@ public class UICONTROLLER implements Initializable{
 		
 		TTSV_btnChangeAva.setOnAction(e -> {
 			try {
-				TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTSV_currentImg)));
+				TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTSV_txtfID.getText())));
 			} catch(Exception ex) {
 				ex.printStackTrace();
 				TTSV_ava.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
 			}
+			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+			TTSV_tbl.refresh();
 		});
+		
+	
+		
 		
 		TTSV_clmID.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
 		TTSV_clmName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
 		TTSV_clmClass.setCellValueFactory(new PropertyValueFactory<Student, String>("classId"));
-		TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+		TTSV_tbl.setItems(FXCollections.observableArrayList(olistTTSV));
+		
+		letFilter(TTSV_tbl, TTSV_txtfFilter);
+		
 		TTSV_btnAdd.setOnAction(e -> {
-			StudentModel.insertInfo(TTSV_txtfID.getText(), TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?false:true, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), TTSV_currentImg);
-			System.out.println(TTSV_ava.toString());
-			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+			TTSV_lblNameE.setText("");
+			TTSV_lblIDE.setText("");
+			TTSV_lblEmailE.setText("");
+			if(CheckForUser.isThisStudentIDexist(TTSV_txtfID.getText())) {
+				TTSV_lblIDE.setText("ID này đã tại");
+				return;
+			} else if (TTSV_txtfName.getText().isEmpty()) {
+				TTSV_lblNameE.setText("Tên không được để trống");
+				return;
+			} else if(TTSV_txtfEmail.getText().isEmpty()) {
+				TTSV_lblEmailE.setText("Email không được để trống");
+				return;
+			} else if(!TTSV_txtfEmail.getText().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+				TTSV_lblEmailE.setText("Email không đúng định dạng");
+				return;
+			} 
+			StudentModel.insertInfo(TTSV_txtfID.getText(), TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?false:true, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), "");
+			SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTSV_txtfID.getText());
+			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
+			TTSV_tbl.setItems(olistTTSV);
 			TTSV_tbl.refresh();
+			letFilter(TTSV_tbl, DSV_txtfFilter);
 		});
+		
 		TTSV_btnUpdate.setOnAction(e -> {
-			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtaAddress.getText(), TTSV_txtfPhone.getText(),TTSV_currentImg, TTSV_txtfID.getText());
-			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+			TTSV_lblNameE.setText("");
+			TTSV_lblIDE.setText("");
+			TTSV_lblEmailE.setText("");
+			if(CheckForUser.isThisStudentIDexist(TTSV_txtfID.getText()) == false) {
+				TTSV_lblIDE.setText("ID này không tồn tại");
+				return;
+			} else if (TTSV_txtfName.getText().isEmpty()) {
+				TTSV_lblNameE.setText("Tên không được để trống");
+				return;
+			} else if(TTSV_txtfEmail.getText().isEmpty()) {
+				TTSV_lblEmailE.setText("Email không được để trống");
+				return;
+			} else if(!TTSV_txtfEmail.getText().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+				TTSV_lblEmailE.setText("Email không đúng định dạng");
+				return;
+			} 
+			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText() , TTSV_txtfID.getText());
+			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
+			TTSV_tbl.setItems(olistTTSV);
 			TTSV_tbl.refresh();
+			letFilter(TTSV_tbl, DSV_txtfFilter);
 		});
 		
 		TTSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
@@ -463,7 +520,7 @@ public class UICONTROLLER implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if(newValue!= null) {
-					System.out.println(newValue.getImage());
+					System.out.println("This from clicked "+newValue.getImage());
 					TTSV_txtfID.setText(newValue.getId());
 					TTSV_txtfName.setText(newValue.getName());
 					TTSV_cboxClass.getSelectionModel().select(newValue.getClassId());
@@ -472,9 +529,8 @@ public class UICONTROLLER implements Initializable{
 					TTSV_txtaAddress.setText(newValue.getAddress());
 					if(newValue.getSex()) TTSV_rdbtnMale.setSelected(true); else TTSV_rdbtnFemale.setSelected(true);
 					try {
-						TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(newValue.getImage())));
+						TTSV_ava.setFill(new ImagePattern(SetImgForCircle.getImageWithPath(newValue.getImage())));
 					} catch(Exception ex) {
-						ex.printStackTrace();
 						TTSV_ava.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
 					}
 
@@ -575,20 +631,26 @@ public class UICONTROLLER implements Initializable{
 		
 		Mmenu_btnChangeAvt.setOnAction(e -> {
 			try {
-				Mmenu_avt.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTTK_currentImg)));
+				Mmenu_avt.setFill(new ImagePattern(SetImgForCircle.setThisAvarUser(UISIGNIN.getStage(), useing.getId())));
 			} catch(Exception ex) {
-				ex.printStackTrace();
 				Mmenu_avt.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
 			}
 		});
 		
+		try {
+			Mmenu_avt.setFill(new ImagePattern(SetImgForCircle.getImageWithPath(useing.getImage())));
+		} catch(Exception ex) {
+			Mmenu_avt.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
+		}
+		
 		//---------Below is TTND button part----------//
 		TTND_txtfID.setEditable(false);
 		TTND_cboxRole.setEditable(false);
-		TTND_tbl.setItems(FXCollections.observableArrayList(UserModel.getAll()));
+		TTND_tbl.setItems(olistTTND);
 		TTND_clmID.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
 		TTND_clmName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
 		TTND_clmEmail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+		letFilterUser(TTND_tbl, TTND_txtfFilter);
 		TTND_btnUpdate.setOnAction(e -> {
 			TTND_lblIDE.setText("");
 			TTND_lblNameE.setText("");
@@ -638,18 +700,21 @@ public class UICONTROLLER implements Initializable{
 			User oldVl = TTND_tbl.getSelectionModel().getSelectedItem();
 			User user = new User(TTND_txtfID.getText(),oldVl.getPassword() , TTND_txtfName.getText(),  TTSV_rdbtnFemale.isSelected()?false:true , TTND_txtfEmail.getText(), TTND_txtfPhone.getText(), TTND_txtaAddress.getText(), oldVl.getPermission(), oldVl.getImage());
 			UserModel.update(user);
-			TTND_tbl.setItems(FXCollections.observableArrayList(UserModel.getAll()));
+			olistTTND = FXCollections.observableArrayList(UserModel.getAll());
+			TTND_tbl.setItems(olistTTND);
 			TTND_tbl.refresh();
+			letFilterUser(TTND_tbl, TTND_txtfFilter);
 			
 		});
 		
 		//-------Below is DSV button part----------//
-		
 		DSV_txtfName.setEditable(false);
 		DSV_txtfID.setEditable(false);
 		DSV_clmID.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
 		DSV_clmName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
-		DSV_tbl.setItems( FXCollections.observableArrayList(StudentModel.getAll()));
+		DSV_clmTB.setCellValueFactory(new PropertyValueFactory<Student, String>("average"));
+		DSV_tbl.setItems( FXCollections.observableArrayList(olistTTSV));
+		letFilter(DSV_tbl, DSV_txtfFilter);
 		DSV_btnUpdate.setOnAction(e -> {
 			DSV_lblNameE.setText("");
 			DSV_lblJSE.setText("");
@@ -666,9 +731,11 @@ public class UICONTROLLER implements Initializable{
 				return;
 			} 
 			StudentModel.updateMarks(DSV_txtfID.getText(), Float.parseFloat(DSV_txtfJava.getText()), Float.parseFloat(DSV_txtfJS.getText()), Float.parseFloat(DSV_txtfGo.getText()));
-			DSV_lblAve.setText((Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3+"");
-			DSV_tbl.setItems( FXCollections.observableArrayList(StudentModel.getAll()));
+			DSV_lblAve.setText(String.format("%.02f", (Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3));
+			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
+			DSV_tbl.setItems(olistTTSV);
 			DSV_tbl.refresh();
+			letFilter(DSV_tbl, DSV_txtfFilter);
 		});	
 		
 		DSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
@@ -681,7 +748,7 @@ public class UICONTROLLER implements Initializable{
 					DSV_txtfJava.setText(newValue.getJava()+"");
 					DSV_txtfJS.setText(newValue.getJavascript()+"");
 					DSV_txtfGo.setText(newValue.getGolang()+"");
-					DSV_lblAve.setText((Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3+"");
+					DSV_lblAve.setText(String.format("%.02f", (Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3));
 				}
 			}
 			
@@ -709,6 +776,54 @@ public class UICONTROLLER implements Initializable{
 		Mmenu_UserManage.setStyle(null);
 	}
 	
+	public void letFilter(TableView<Student> tbl, TextField txtf) {
+		FilteredList<Student> ftlistTTSV = new FilteredList<>(olistTTSV, p -> true);
+//		TTSV_txtfFilter.setText("haiz");
+		txtf.textProperty().addListener((observable, oldValue, newValue) -> {
+			ftlistTTSV.setPredicate(student -> {
+				if(newValue == null || newValue.isEmpty() ) {
+					return true;
+				}
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if(student.getId().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} else if(student.getName().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} 
+				return false;
+			});
+			
+		});
+		SortedList<Student> srtListTTSV =new SortedList<>(ftlistTTSV);
+		srtListTTSV.comparatorProperty().bind(tbl.comparatorProperty());
+		tbl.setItems(srtListTTSV);
+		
+	}
 	
+	public void letFilterUser(TableView<User> tbl, TextField txtf) {
+		FilteredList<User> ftlistTTSV = new FilteredList<>(olistTTND, p -> true);
+//		TTSV_txtfFilter.setText("haiz");
+		txtf.textProperty().addListener((observable, oldValue, newValue) -> {
+			ftlistTTSV.setPredicate(student -> {
+				if(newValue == null || newValue.isEmpty() ) {
+					return true;
+				}
+				String lowerCaseFilter = newValue.toLowerCase();
+				
+				if(student.getId().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} else if(student.getName().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} 
+				return false;
+			});
+			
+		});
+		SortedList<User> srtListTTSV =new SortedList<>(ftlistTTSV);
+		srtListTTSV.comparatorProperty().bind(tbl.comparatorProperty());
+		tbl.setItems(srtListTTSV);
+		
+	}
 
 }

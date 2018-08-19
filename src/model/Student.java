@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DecimalFormat;
+
 public class Student {
 
     private String id;
@@ -13,8 +15,19 @@ public class Student {
     private float java;
     private float javascript;
     private float golang;
+    private String average;
 
-    public Student() {
+    
+    public String getAverage() {
+    	
+		return  String.format("%.02f", (java+javascript+golang)/3);
+	}
+
+	public void setAverage(String average) {
+		this.average = average;
+	}
+
+	public Student() {
     }
 
 //	tạo đối tượng không cần điểm

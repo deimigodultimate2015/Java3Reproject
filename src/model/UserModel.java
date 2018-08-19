@@ -24,6 +24,20 @@ public class UserModel {
         conn = DBUtils.getConnection();
     } 
 
+    public static void updateAvatar(String ID, String avatar) {
+    	Connection conn = DBUtils.getConnection();
+    	try {
+    		PreparedStatement ps = conn.prepareStatement("Update account set image = ? where id = ?");
+    		ps.setString(1, avatar);
+    		ps.setString(2, ID);
+    		ps.executeUpdate();
+    		conn.close();
+    		System.out.println("Update complete "+ID+" "+avatar);
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
     public static List<? extends User> getAll() {
         List data = new ArrayList();
         try {

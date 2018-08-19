@@ -8,11 +8,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.StudentModel;
+import model.UserModel;
 
 public class SetImgForCircle {
-	public static Image setThisAvar(Stage stage, String thatCurrent) {
+	public static Image setThisAvar(Stage stage, String ID) {
 		Image image = null;
 		FileChooser fchooser  = new FileChooser();
+		fchooser.setTitle("choose image for "+ID);
 		File file = fchooser.showOpenDialog(stage);
 		FileChooser.ExtensionFilter exFilter1 = new FileChooser.ExtensionFilter("PNG files (*.txt)", "*.png");
 		FileChooser.ExtensionFilter exFilter2 = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg");
@@ -20,12 +23,10 @@ public class SetImgForCircle {
 		fchooser.setSelectedExtensionFilter(exFilter1); fchooser.setSelectedExtensionFilter(exFilter2); fchooser.setSelectedExtensionFilter(exFilter3);
 		if(file != null) {
 			try {
-				System.out.println(file.getAbsolutePath());
-				thatCurrent = file.getAbsolutePath();
 				image = new Image(new FileInputStream(file.getAbsolutePath()));
-				System.out.println("is img null "+(image == null ? true : false));
+				StudentModel.updateAvatar(ID, file.getAbsolutePath());
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				System.out.println(ex);
 			} 
 			
 		} 
@@ -33,16 +34,37 @@ public class SetImgForCircle {
 		return image;
 	}
 	
-	public static Image setThisAvar(String thatCurrent) {
+	public static Image setThisAvarUser(Stage stage, String ID) {
 		Image image = null;
+		FileChooser fchooser  = new FileChooser();
+		fchooser.setTitle("choose image for "+ID);
+		File file = fchooser.showOpenDialog(stage);
+		FileChooser.ExtensionFilter exFilter1 = new FileChooser.ExtensionFilter("PNG files (*.txt)", "*.png");
+		FileChooser.ExtensionFilter exFilter2 = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg");
+		FileChooser.ExtensionFilter exFilter3 = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg");
+		fchooser.setSelectedExtensionFilter(exFilter1); fchooser.setSelectedExtensionFilter(exFilter2); fchooser.setSelectedExtensionFilter(exFilter3);
+		if(file != null) {
 			try {
-				image = new Image(new FileInputStream(thatCurrent));
-				System.out.println("is img null "+(image == null ? true : false));
+				image = new Image(new FileInputStream(file.getAbsolutePath()));
+				UserModel.updateAvatar(ID, file.getAbsolutePath());
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				System.out.println(ex);
 			} 
 			
+		} 
 		
 		return image;
 	}
+	
+	public static Image getImageWithPath(String path) {
+		System.out.println("From set imge from click: "+path);
+		Image image = null;
+		try {
+			image = new Image(new FileInputStream(path));
+		} catch (Exception ex) {
+			System.out.println(ex);
+		} 
+		return image;
+	}
+	
 }

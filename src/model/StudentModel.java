@@ -18,13 +18,27 @@ public class StudentModel {
     private static String sqlInsertInfo = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     private static String sqlInsertMarks = "INSERT INTO marks VALUES(?, null, null, null)";
     private static String sqlUpdateMarks = "UPDATE marks SET java = ?, javascript = ?, golang = ? WHERE student_id = ?";
-    private static String sqlUpdateInfo = "UPDATE student SET name = ?, sex = ?, class_id = ?, email = ?, phone_number = ?, address = ?, image = ? WHERE id = ?";
+    private static String sqlUpdateInfo = "UPDATE student SET name = ?, sex = ?, class_id = ?, email = ?, phone_number = ?, address = ? WHERE id = ?";
     private static String sqlUpdateNullMarks = "UPDATE marks SET java = null, javascript = null, golang = null WHERE student_id = ?";
     private static String sqlDeleteMarks = "DELETE FROM marks WHERE student_id = ?";
     private static String sqlDeleteInfo = "DELETE FROM student WHERE id = ?";
 
     static{
         conn = model.DBUtils.getConnection();
+    }
+    
+    public static void updateAvatar(String ID, String avatar) {
+    	Connection conn = DBUtils.getConnection();
+    	try {
+    		PreparedStatement ps = conn.prepareStatement("Update student set image = ? where id = ?");
+    		ps.setString(1, avatar);
+    		ps.setString(2, ID);
+    		ps.executeUpdate();
+    		conn.close();
+    		System.out.println("Update complete "+ID+" "+avatar);
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    	}
     }
     
     public static List<Student> getAll(){
@@ -88,7 +102,7 @@ public class StudentModel {
     }
 
 //	cập nhật thông tin sinh viên
-    public static boolean updateÌnfo(String name, boolean sex, String classID, String email, String phone , String address, String img, String id){
+    public static boolean updateÌnfo(String name, boolean sex, String classID, String email, String phone , String address, String id){
         try {
             stmt = conn.prepareStatement(sqlUpdateInfo);
             stmt.setString(1, name);
@@ -97,9 +111,7 @@ public class StudentModel {
             stmt.setString(4, email);
             stmt.setString(5, phone);
             stmt.setString(6, address);
-            stmt.setString(7, img);
-            System.out.println(img);
-            stmt.setString(8, id);
+            stmt.setString(7, id);
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
