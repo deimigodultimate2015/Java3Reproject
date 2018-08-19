@@ -13,11 +13,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -56,11 +56,16 @@ public class UISIGNIN implements Initializable{
 
     @FXML
     private Label lblFail;
+
+    @FXML
+    private Hyperlink lnkHelp;
+
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		scaleTransition = new ScaleTransition(Duration.millis(50),btnSignin);
+		lblFail.setVisible(false);
 		
 		if(!RememberMe.isItEmpty()) {
 			txtfUsername.setText(RememberMe.whatInYourMind()[0]);
@@ -91,7 +96,7 @@ public class UISIGNIN implements Initializable{
 		});
 		
 		btnSignin.setOnAction( ez-> {
-			
+			lblFail.setVisible(false);
 			if(chkboxRemember.isSelected()) {
 				RememberMe.rememberThis(txtfUsername.getText(), txtfPassword.getText());
 			} else {

@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TitledPane animated="false" text="Thông tin chung">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="- Tên dự án: Phần mêm siêu cấp quản lí sinh viên" VBox.vgrow="ALWAYS" />
+                        <Label text="- Các thành viên tham gia:" />
+                        <Label text="     + Thái Xuân Thọ : Phụ trách mảng UI cũng như thúc giục nhóm làm assigment" />
+                        <Label text="     + Võ Thành Tài: Phụ trách mảng controller" />
+                        <Label text="     + Trần Duy Quang: Phụ trách mảng model" />
+                        <Label text="- Khoảng thời gian hoàn thành dự án: 6 ngày (do nhóm delay nhiều gần đến deadline mới hối thúc làm việc)" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
