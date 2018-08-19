@@ -117,7 +117,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Pane fx:id="TTSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
+            <Pane fx:id="TTSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
                <children>
                   <TextField fx:id="TTSV_txtfID" layoutX="167.0" layoutY="204.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="205.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Sinh viên" textFill="WHITE">
@@ -155,7 +155,7 @@
                   </Label>
                   <Button fx:id="TTSV_btnAdd" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Thêm sinh viên" textFill="WHITE" />
                   <Button fx:id="TTSV_btnUpdate" layoutX="14.0" layoutY="596.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
-                  <TableView fx:id="TTSV_tbl" layoutX="393.0" layoutY="48.0" prefHeight="539.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
+                  <TableView fx:id="TTSV_tbl" layoutX="397.0" layoutY="19.0" prefHeight="605.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
                      <columns>
                         <TableColumn fx:id="TTSV_clmID" prefWidth="75.0" text="ID Sinh Viên" />
                         <TableColumn fx:id="TTSV_clmName" prefWidth="75.0" text="Họ và tên" />
@@ -169,16 +169,6 @@
                      <font>
                         <Font size="30.0" />
                      </font>
-                  </Label>
-                  <Button fx:id="TTSV_btnFirst" layoutX="453.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng đầu" textFill="WHITE" />
-                  <Button fx:id="TTSV_btnPrev" layoutX="570.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng trước" textFill="WHITE" />
-                  <Button fx:id="TTSV_btnLast" layoutX="869.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng cuối" textFill="WHITE" />
-                  <Button fx:id="TTSV_btnNext" layoutX="747.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng kế" textFill="WHITE" />
-                  <TextField fx:id="TTSV_txtfFilter" layoutX="544.0" layoutY="19.0" prefHeight="26.0" prefWidth="492.0" promptText="Nhập dữ liệu bạn muốn tìm tại đây" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
-                  <Label alignment="CENTER" layoutX="394.0" layoutY="20.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: #564B6F;" text="Tìm kiếm" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="2.0" />
-                     </padding>
                   </Label>
                   <Line endX="12.0" endY="555.0" layoutX="364.0" layoutY="78.0" startX="12.0" startY="-77.0" />
                   <Circle fx:id="TTSV_ava" fill="WHITE" layoutX="200.0" layoutY="138.0" radius="55.0" stroke="#ffffff00" strokeType="INSIDE" />
@@ -249,7 +239,7 @@
                   </Label>
                   <Button fx:id="DSV_btnUpdate" layoutX="22.0" layoutY="541.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật điểm" textFill="WHITE" />
                   <Button fx:id="DSV_btnRefresh" layoutX="22.0" layoutY="584.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Làm mới " textFill="WHITE" />
-                  <TableView fx:id="DSV_tbl" layoutX="393.0" layoutY="48.0" prefHeight="539.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
+                  <TableView fx:id="DSV_tbl" layoutX="397.0" layoutY="13.0" prefHeight="595.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
                      <columns>
                         <TableColumn fx:id="DSV_clmID" prefWidth="75.0" text="ID Sinh Viên" />
                         <TableColumn fx:id="DSV_clmName" prefWidth="75.0" text="Họ và tên" />
@@ -262,16 +252,6 @@
                      <font>
                         <Font size="30.0" />
                      </font>
-                  </Label>
-                  <Button fx:id="DSV_btnFirst" layoutX="453.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng đầu" textFill="WHITE" />
-                  <Button fx:id="DSV_btnPrev" layoutX="570.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng trước" textFill="WHITE" />
-                  <Button fx:id="DSV_btnLast" layoutX="869.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng cuối" textFill="WHITE" />
-                  <Button fx:id="DSV_btnNext" layoutX="747.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng kế" textFill="WHITE" />
-                  <TextField fx:id="DSV_txtfFilter" layoutX="544.0" layoutY="19.0" prefHeight="26.0" prefWidth="492.0" promptText="Nhập dữ liệu bạn muốn tìm tại đây" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
-                  <Label alignment="CENTER" layoutX="394.0" layoutY="20.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: #564B6F;" text="Tìm kiếm" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="2.0" />
-                     </padding>
                   </Label>
                   <Line endX="12.0" endY="555.0" layoutX="364.0" layoutY="78.0" startX="12.0" startY="-77.0" />
                   <Label alignment="CENTER" layoutX="25.0" layoutY="124.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
@@ -286,7 +266,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
+            <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
                <children>
                   <TextField fx:id="TTND_txtfName" layoutX="167.0" layoutY="149.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Họ à tên" textFill="WHITE">
@@ -316,9 +296,9 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="TTND_btnRefresh" layoutX="22.0" layoutY="508.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Thêm người dùng" textFill="WHITE" />
+                  <Button fx:id="TTND_btnRefresh" layoutX="22.0" layoutY="508.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Làm mới" textFill="WHITE" />
                   <Button fx:id="TTND_btnUpdate" layoutX="22.0" layoutY="550.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
-                  <TableView fx:id="TTND_tbl" layoutX="393.0" layoutY="48.0" prefHeight="540.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
+                  <TableView fx:id="TTND_tbl" layoutX="389.0" layoutY="16.0" prefHeight="608.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
                      <columns>
                         <TableColumn fx:id="TTND_clmID" prefWidth="75.0" text="ID người dùng" />
                         <TableColumn fx:id="TTND_clmName" prefWidth="75.0" text="Họ và tên" />
@@ -332,16 +312,6 @@
                      <font>
                         <Font size="30.0" />
                      </font>
-                  </Label>
-                  <Button fx:id="TTND_btnFIrst" layoutX="453.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng đầu" textFill="WHITE" />
-                  <Button fx:id="TTND_btnPrev" layoutX="570.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng trước" textFill="WHITE" />
-                  <Button fx:id="TTND_btnLast" layoutX="869.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng cuối" textFill="WHITE" />
-                  <Button fx:id="TTND_btnNext" layoutX="747.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Dòng kế" textFill="WHITE" />
-                  <TextField fx:id="TTND_txtfFilter" layoutX="544.0" layoutY="19.0" prefHeight="26.0" prefWidth="492.0" promptText="Nhập dữ liệu bạn muốn tìm tại đây" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
-                  <Label alignment="CENTER" layoutX="394.0" layoutY="20.0" prefHeight="25.0" prefWidth="152.0" style="-fx-background-color: #564B6F;" text="Tìm kiếm" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="2.0" />
-                     </padding>
                   </Label>
                   <Line endX="12.0" endY="555.0" layoutX="364.0" layoutY="78.0" startX="12.0" startY="-77.0" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="400.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Địa chỉ" textFill="WHITE">

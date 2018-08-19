@@ -95,20 +95,7 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private TableColumn<Student, String> TTSV_clmClass;
 
-    @FXML
-    private Button TTSV_btnFirst;
-
-    @FXML
-    private Button TTSV_btnPrev;
-
-    @FXML
-    private Button TTSV_btnLast;
-
-    @FXML
-    private Button TTSV_btnNext;
-
-    @FXML
-    private TextField TTSV_txtfFilter;
+  
 
     @FXML
     private Circle TTSV_ava;
@@ -179,20 +166,7 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private TableColumn<Student, String> DSV_clmName;
 
-    @FXML
-    private Button DSV_btnFirst;
-
-    @FXML
-    private Button DSV_btnPrev;
-
-    @FXML
-    private Button DSV_btnLast;
-
-    @FXML
-    private Button DSV_btnNext;
-
-    @FXML
-    private TextField DSV_txtfFilter;
+    
 
     @FXML
     private Label DSV_lblNameE;
@@ -239,21 +213,7 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private TableColumn<User, String> TTND_clmEmail;
 
-    @FXML
-    private Button TTND_btnFIrst;
-
-    @FXML
-    private Button TTND_btnPrev;
-
-    @FXML
-    private Button TTND_btnLast;
-
-    @FXML
-    private Button TTND_btnNext;
-
-    @FXML
-    private TextField TTND_txtfFilter;
-
+   
     @FXML
     private Label TTND_lblRoleE;
 
@@ -726,12 +686,7 @@ public class UICONTROLLER implements Initializable{
 			}
 			
 		});
-		DSV_btnFirst.setOnAction(e -> {
-			DSV_tbl.getSelectionModel().selectFirst();
-		});
-		DSV_btnLast.setOnAction(e -> {
-			DSV_tbl.getSelectionModel().selectLast();
-		});
+		
 		
 		
 	}
