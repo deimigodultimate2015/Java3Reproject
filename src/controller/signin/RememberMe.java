@@ -1,4 +1,4 @@
-package signincontroller;
+package controller.signin;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

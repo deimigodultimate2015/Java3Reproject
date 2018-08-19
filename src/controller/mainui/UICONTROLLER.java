@@ -1,8 +1,9 @@
-package mainuicontroller;
+package controller.mainui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.signin.UISIGNIN;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -19,7 +20,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import signincontroller.UISIGNIN;
 import view.UI1M;
 
 public class UICONTROLLER implements Initializable{

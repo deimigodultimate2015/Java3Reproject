@@ -1,4 +1,4 @@
-package signincontroller;
+package controller.signin;
 
 import java.net.URL;
 import java.util.ResourceBundle;
