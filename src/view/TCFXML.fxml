@@ -23,7 +23,7 @@
    <left>
       <Pane prefHeight="760.0" prefWidth="220.0" style="-fx-background-color: #62466B;" BorderPane.alignment="CENTER">
          <children>
-            <Circle fill="WHITE" layoutX="110.0" layoutY="120.0" radius="65.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Circle fx:id="Mmenu_avt" fill="WHITE" layoutX="110.0" layoutY="120.0" radius="65.0" stroke="TRANSPARENT" strokeType="INSIDE" />
             <Button fx:id="Mmenu_btnAccountInfo" alignment="BASELINE_LEFT" layoutY="225.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="220.0" stylesheets="@MmenuBtn.css" text="Thông tin tài khoản" textFill="WHITE">
                <padding>
                   <Insets left="10.0" />
@@ -122,7 +122,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Pane fx:id="TTSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
+            <Pane fx:id="TTSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
                <children>
                   <TextField fx:id="TTSV_txtfID" layoutX="167.0" layoutY="204.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="205.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Sinh viên" textFill="WHITE">
@@ -188,10 +188,14 @@
                   <ComboBox fx:id="TTSV_txtfCboxFilter" layoutX="885.0" layoutY="19.0" prefHeight="26.0" prefWidth="152.0" promptText="Chọn cột" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Line endX="12.0" endY="555.0" layoutX="364.0" layoutY="78.0" startX="12.0" startY="-77.0" />
                   <Circle fx:id="TTSV_ava" fill="WHITE" layoutX="179.0" layoutY="130.0" radius="44.0" stroke="#ffffff00" strokeType="INSIDE" />
-                  <Button fx:id="TTSV_btnChangeAva" alignment="CENTER" layoutX="135.0" layoutY="86.0" mnemonicParsing="false" prefHeight="88.0" prefWidth="88.0" style="-fx-background-color: #212121; -fx-background-radius: 130; -fx-opacity: 0.3;" stylesheets="@UI1CSS.css" text="Change" textFill="WHITE">
+                  <Button fx:id="TTSV_btnChangeAva" alignment="CENTER" layoutX="135.0" layoutY="86.0" mnemonicParsing="false" prefHeight="88.0" prefWidth="88.0" text="Change" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <stylesheets>
+                        <URL value="@UI1CSS.css" />
+                        <URL value="@btnChangeAvt.css" />
+                     </stylesheets>
                   </Button>
                   <Label alignment="CENTER" layoutX="17.0" layoutY="505.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Địa chỉ" textFill="WHITE">
                      <padding>
@@ -294,7 +298,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
+            <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
                <children>
                   <TextField fx:id="TTND_txtfName" layoutX="167.0" layoutY="149.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Họ à tên" textFill="WHITE">

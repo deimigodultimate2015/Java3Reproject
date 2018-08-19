@@ -27,7 +27,16 @@ public class UISIGNIN implements Initializable{
 	private ScaleTransition scaleTransition;
 	
 	private static Scene scene;
+	private static Stage stage;
 	
+	public static Stage getStage() {
+		return stage;
+	}
+
+	public static void setStage(Stage stage) {
+		UISIGNIN.stage = stage;
+	}
+
 	public static Scene getScene() {
 		return scene;
 	}

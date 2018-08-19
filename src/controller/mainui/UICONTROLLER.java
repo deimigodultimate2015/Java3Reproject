@@ -20,7 +20,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import view.UI1M;
 
 public class UICONTROLLER implements Initializable{
 
@@ -351,6 +350,8 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private ComboBox<?> TTTK_cboxRole;
     
+    @FXML
+    private Circle Mmenu_avt;
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -478,6 +479,10 @@ public class UICONTROLLER implements Initializable{
 				TTTK_lblRePassE.setText("Password không khớp với password trên");
 				return;
 			}
+		});
+		//---------Below is Main Menu button----------//
+		Mmenu_btnChangeAvt.setOnAction(e -> {
+			SetImgForCircle.setThisAvar(Mmenu_avt, UISIGNIN.getStage());
 		});
 		
 		//---------Below is TTND button part----------//
