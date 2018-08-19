@@ -13,9 +13,9 @@ public class DBUtils {
     private static String URL = "jdbc:sqlserver://localhost:1433;databaseName=school_manager";
     private static String USER = "sa";
     private static String PASS = "123";
-    
-    static {
-        try {
+
+    public static Connection getConnection() {
+    	try {
             java.lang.Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL, USER, PASS);
         } catch (SQLException ex) {
@@ -23,9 +23,6 @@ public class DBUtils {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public static Connection getConnection() {
         return conn;
     }
 }

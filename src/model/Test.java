@@ -10,7 +10,10 @@ public class Test {
 
     public static void main(String[] args) {
         Student a = new Student("PS06636", "quang", true, "PT13301", "thanhtai@mgádf", "091234", "TG", "D://", 10, 9, 10);
-        StudentModel.insertInfo(a);
+        for(Student st : StudentModel.getAll()) {
+        	System.out.println(st.getId());
+        }
+//        StudentModel.insertInfo(a);
 //        StudentModel.insertMarks(a);
 //          StudyClass a = new StudyClass("PT13302", "TE001", "haha");
 //          StudyClassModel.delete("PT13302");

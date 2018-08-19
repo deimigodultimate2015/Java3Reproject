@@ -109,17 +109,17 @@ public class StudentModel {
     }
 
 //	thêm sinh viên mới
-    public static boolean insertInfo(Student student){
+    public static boolean insertInfo(String ID, String name, boolean sex, String classID, String email, String phone ,String adress, String image){
         try {
             stmt = conn.prepareStatement(sqlInsertInfo);
-            stmt.setString(1, student.getId());
-            stmt.setString(2, student.getName());
-            stmt.setBoolean(3, student.getSex());
-            stmt.setString(4, student.getClassId());
-            stmt.setString(5, student.getEmail());
-            stmt.setString(6, student.getPhoneNumber());
-            stmt.setString(7, student.getAddress());
-            stmt.setString(8, student.getImage());
+            stmt.setString(1, ID);
+            stmt.setString(2, name);
+            stmt.setBoolean(3, sex);
+            stmt.setString(4, classID);
+            stmt.setString(5, email);
+            stmt.setString(6, phone);
+            stmt.setString(7, adress);
+            stmt.setString(8, image);
             
             stmt.execute();
             return true;

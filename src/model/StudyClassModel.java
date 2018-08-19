@@ -25,7 +25,7 @@ public class StudyClassModel {
         conn = DBUtils.getConnection();
     } 
     
-    public static List<? extends User> getAll() {
+    public static List<? extends StudyClass> getAll() {
         List data = new ArrayList();
         try {
             stmt = conn.prepareStatement(sqlSelectAll);
