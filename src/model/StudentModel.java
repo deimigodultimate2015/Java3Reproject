@@ -16,7 +16,7 @@ public class StudentModel {
     
     private static String sqlSelectAll = "SELECT * FROM student JOIN marks ON student_id = id";
     private static String sqlInsertInfo = "INSERT INTO student VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    private static String sqlInsertMarks = "INSERT INTO marks VALUES(?, ?, ?, ?)";
+    private static String sqlInsertMarks = "INSERT INTO marks VALUES(?, null, null, null)";
     private static String sqlUpdateMarks = "UPDATE marks SET java = ?, javascript = ?, golang = ? WHERE student_id = ?";
     private static String sqlUpdateInfo = "UPDATE student SET name = ?, sex = ?, class_id = ?, email = ?, phone_number = ?, address = ?, image = ? WHERE id = ?";
     private static String sqlUpdateNullMarks = "UPDATE marks SET java = null, javascript = null, golang = null WHERE student_id = ?";
@@ -58,13 +58,13 @@ public class StudentModel {
     }
 
 //	cập nhật điểm sinh viên
-    public static boolean updateMarks(String ID, float java, float js, float go){
+    public static boolean updateMarks(String id, float java, float js, float go){
         try {
             stmt = conn.prepareStatement(sqlUpdateMarks);
             stmt.setFloat(1, java);
             stmt.setFloat(2, js);
             stmt.setFloat(3, go);
-            stmt.setString(4, ID);
+            stmt.setString(4,id);
 
             stmt.executeUpdate();
             return true;
@@ -88,7 +88,7 @@ public class StudentModel {
     }
 
 //	cập nhật thông tin sinh viên
-    public static boolean updateÌnfo(String name, boolean sex, String classID, String email, String phone, String address, String image, String ID){
+    public static boolean updateÌnfo(String name, boolean sex, String classID, String email, String phone , String address, String img, String id){
         try {
             stmt = conn.prepareStatement(sqlUpdateInfo);
             stmt.setString(1, name);
@@ -97,9 +97,9 @@ public class StudentModel {
             stmt.setString(4, email);
             stmt.setString(5, phone);
             stmt.setString(6, address);
-            stmt.setString(7, image);
+            stmt.setString(7, img);
 
-            stmt.setString(8, ID);
+            stmt.setString(8, id);
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -109,19 +109,20 @@ public class StudentModel {
     }
 
 //	thêm sinh viên mới
-    public static boolean insertInfo(String ID, String name, boolean sex, String classID, String email, String phone ,String adress, String image){
+    public static boolean insertInfo(String id, String name, boolean sex, String classID, String email, String phone, String address, String image){
         try {
             stmt = conn.prepareStatement(sqlInsertInfo);
-            stmt.setString(1, ID);
+            stmt.setString(1, id);
             stmt.setString(2, name);
             stmt.setBoolean(3, sex);
             stmt.setString(4, classID);
             stmt.setString(5, email);
-            stmt.setString(6, phone);
-            stmt.setString(7, adress);
-            stmt.setString(8, image);
+            stmt.setString(6, address);
+            stmt.setString(7, phone);
+            stmt.setString(8, address);
             
             stmt.execute();
+            model.StudentModel.insertMarks(id);
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(StudentModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,13 +130,10 @@ public class StudentModel {
         }
     }
     
-    public static boolean insertMarks(Student student){
+    public static boolean insertMarks(String id){
         try {
             stmt = conn.prepareStatement(sqlInsertMarks);
-            stmt.setString(1, student.getId());
-            stmt.setFloat(2, student.getJava());
-            stmt.setFloat(3, student.getJavascript());
-            stmt.setFloat(4, student.getGolang());    
+            stmt.setString(1, id); 
             stmt.execute();
             
             return true;
