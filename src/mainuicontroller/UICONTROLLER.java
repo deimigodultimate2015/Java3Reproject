@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -14,8 +16,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import signincontroller.UISIGNIN;
+import view.UI1M;
 
 public class UICONTROLLER implements Initializable{
 
@@ -353,6 +358,15 @@ public class UICONTROLLER implements Initializable{
 		
 		//------------------------------Below is UI part----------------------------------//
 		btnExit.setOnAction(e -> {System.exit(0);});
+		btnExit.setOnMouseEntered(e -> {
+			btnExit.setText("Do you really want to exit ?");
+			Image img = new Image(getClass().getResourceAsStream("uhm.png"));
+			UISIGNIN.getScene().setCursor(new ImageCursor(img));
+		});
+		btnExit.setOnMouseExited(e -> {
+			btnExit.setText("X");
+			UISIGNIN.getScene().setCursor(Cursor.DEFAULT);
+		});
 		Mmenu_btnAccountInfo.setOnMousePressed(e -> {
 			Mmenu_btnAccountInfo.setStyle("-fx-background-color: #98869E");
 			Mmenu_MarkManage.setStyle(null);

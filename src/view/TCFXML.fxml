@@ -117,7 +117,7 @@
    <center>
       <Pane prefHeight="860.0" prefWidth="1055.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnExit" mnemonicParsing="false" prefHeight="41.0" prefWidth="1055.0" stylesheets="@UI1CSS.css" text="X" textFill="WHITE">
+            <Button fx:id="btnExit" mnemonicParsing="false" prefHeight="41.0" prefWidth="1055.0" stylesheets="@UI1CSS2.css" text="X" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>

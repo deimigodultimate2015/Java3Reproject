@@ -42,7 +42,7 @@
          <center>
             <Pane prefHeight="200.0" prefWidth="361.0" style="-fx-background-color: #2B303A;" BorderPane.alignment="CENTER">
                <children>
-                  <TextField layoutX="47.0" layoutY="104.0" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #e1e1e1; -fx-text-fill: #e1e1e1;">
+                  <TextField fx:id="txtfUsername" layoutX="47.0" layoutY="104.0" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #e1e1e1; -fx-text-fill: #e1e1e1;">
                      <padding>
                         <Insets left="-2.0" />
                      </padding>
@@ -57,17 +57,22 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnSignin" layoutX="44.0" layoutY="285.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="277.0" style="-fx-background-color: #564787;" text="Sign in" textFill="WHITE" />
-                  <CheckBox layoutX="51.0" layoutY="236.0" mnemonicParsing="false" style="-fx-shadow-highlight-color: transparent;" text="Remember me" textFill="#e1e1e1" />
+                  <Button fx:id="btnSignin" layoutX="45.0" layoutY="311.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="277.0" style="-fx-background-color: #564787;" text="Sign in" textFill="WHITE" />
+                  <CheckBox fx:id="chkboxRemember" layoutX="50.0" layoutY="226.0" mnemonicParsing="false" style="-fx-shadow-highlight-color: transparent;" text="Remember me" textFill="#e1e1e1" />
                   <Label layoutX="47.0" layoutY="22.0" text="SIGN IN" textFill="WHITE">
                      <font>
                         <Font name="Gill Sans MT" size="30.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="48.0" layoutY="182.0" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #e1e1e1; -fx-text-fill: #e1e1e1;">
+                  <PasswordField fx:id="txtfPassword" layoutX="48.0" layoutY="182.0" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #e1e1e1; -fx-text-fill: #e1e1e1;">
                      <padding>
                         <Insets left="-2.0" />
                      </padding></PasswordField>
+                  <Label fx:id="lblFail" alignment="CENTER" layoutX="49.0" layoutY="260.0" prefHeight="40.0" prefWidth="270.0" style="-fx-border-width: 2 0 2 0; -fx-border-color: #ff3030;" text=" - LOGIN FAIL -" textFill="#ff3030">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </center>

@@ -44,7 +44,7 @@ public class UI1M extends Application{
 			root.setOnMouseDragged(e -> {
 				stage.setX(e.getScreenX() - xOffset);
 				stage.setY(e.getScreenY() - yOffset);
-			});
+			});	
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.initStyle(StageStyle.UNDECORATED);
