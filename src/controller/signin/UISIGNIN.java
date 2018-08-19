@@ -1,6 +1,7 @@
 package controller.signin;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.animation.ScaleTransition;
@@ -21,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import model.User;
 import view.UI1M;
 
 public class UISIGNIN implements Initializable{
@@ -69,16 +71,27 @@ public class UISIGNIN implements Initializable{
     @FXML
     private Hyperlink lnkHelp;
 
+    private static User useing ; 
     
+	public static User getUseing() {
+		return useing;
+	}
+
+	public static void setUseing(User useing) {
+		UISIGNIN.useing = useing;
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
 		scaleTransition = new ScaleTransition(Duration.millis(50),btnSignin);
 		lblFail.setVisible(false);
 		
 		if(!RememberMe.isItEmpty()) {
 			txtfUsername.setText(RememberMe.whatInYourMind()[0]);
 			txtfPassword.setText(RememberMe.whatInYourMind()[1]);
+			chkboxRemember.setSelected(true);
 		}
 		
 		btnExit.setOnAction(e -> {
@@ -112,26 +125,30 @@ public class UISIGNIN implements Initializable{
 				RememberMe.dontRememberThis();
 			}
 			
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/view/TCFXML.fxml"));
-				
-				scene = new Scene(root);
-				Stage stage = new Stage();
-				root.setOnMousePressed(e -> {
-					yOffset = e.getSceneY();
-					xOffset = e.getSceneX();
-				});
-				
-				root.setOnMouseDragged(e -> {
-					stage.setX(e.getScreenX() - xOffset);
-					stage.setY(e.getScreenY() - yOffset);
-				});
-				stage.initStyle(StageStyle.UNDECORATED);
-				stage.setScene(scene);
-				stage.show();
-				UI1M.getStage().close();
-			} catch (Exception ex) {
-				ex.printStackTrace();
+			if(CheckLogin.isThisAccountExist(txtfUsername.getText(),txtfPassword.getText()) != null) {
+				try {
+					useing = CheckLogin.isThisAccountExist(txtfUsername.getText(), txtfPassword.getText());
+					Parent root = FXMLLoader.load(getClass().getResource("/view/TCFXML.fxml"));
+					scene = new Scene(root);
+					Stage stage = new Stage();
+					root.setOnMousePressed(e -> {
+						yOffset = e.getSceneY();
+						xOffset = e.getSceneX();
+					});
+					
+					root.setOnMouseDragged(e -> {
+						stage.setX(e.getScreenX() - xOffset);
+						stage.setY(e.getScreenY() - yOffset);
+					});
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.setScene(scene);
+					stage.show();
+					UI1M.getStage().hide();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			} else {
+				lblFail.setVisible(true);
 			}
 		});
 	}

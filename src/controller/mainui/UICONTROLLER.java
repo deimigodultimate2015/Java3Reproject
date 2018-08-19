@@ -4,6 +4,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controller.signin.UISIGNIN;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -17,13 +21,22 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import model.Student;
+import model.StudentModel;
+import model.User;
+import model.UserModel;
 
 public class UICONTROLLER implements Initializable{
 
 	@FXML
+    private Circle Mmenu_avt;
+
+    @FXML
     private Button Mmenu_btnAccountInfo;
 
     @FXML
@@ -66,16 +79,16 @@ public class UICONTROLLER implements Initializable{
     private Button TTSV_btnUpdate;
 
     @FXML
-    private TableView<?> TTSV_tbl;
+    private TableView<Student> TTSV_tbl;
 
     @FXML
-    private TableColumn<?, ?> TTSV_clmID;
+    private TableColumn<Student, String> TTSV_clmID;
 
     @FXML
-    private TableColumn<?, ?> TTSV_clmName;
+    private TableColumn<Student, String> TTSV_clmName;
 
     @FXML
-    private TableColumn<?, ?> TTSV_clmClass;
+    private TableColumn<Student, String> TTSV_clmClass;
 
     @FXML
     private Button TTSV_btnFirst;
@@ -93,7 +106,7 @@ public class UICONTROLLER implements Initializable{
     private TextField TTSV_txtfFilter;
 
     @FXML
-    private ComboBox<?> TTSV_txtfCboxFilter;
+    private ComboBox<String> TTSV_txtfCboxFilter;
 
     @FXML
     private Circle TTSV_ava;
@@ -129,7 +142,7 @@ public class UICONTROLLER implements Initializable{
     private Label TTSV_lblClassE;
 
     @FXML
-    private ComboBox<?> TTSV_cboxClass;
+    private ComboBox<String> TTSV_cboxClass;
 
     @FXML
     private Pane DSV_pane;
@@ -156,16 +169,13 @@ public class UICONTROLLER implements Initializable{
     private Button DSV_btnRefresh;
 
     @FXML
-    private TableView<?> DSV_tbl;
+    private TableView<Student> DSV_tbl;
 
     @FXML
-    private TableColumn<?, ?> DSV_clmID;
+    private TableColumn<Student, String> DSV_clmID;
 
     @FXML
-    private TableColumn<?, ?> DSV_clmName;
-
-    @FXML
-    private TableColumn<?, ?> DSV_clmAve;
+    private TableColumn<Student, String> DSV_clmName;
 
     @FXML
     private Button DSV_btnFirst;
@@ -183,7 +193,19 @@ public class UICONTROLLER implements Initializable{
     private TextField DSV_txtfFilter;
 
     @FXML
-    private ComboBox<?> DSV_cboxFilter;
+    private ComboBox<String> DSV_cboxFilter;
+
+    @FXML
+    private Label DSV_lblNameE;
+
+    @FXML
+    private Label DSV_lblJSE;
+
+    @FXML
+    private Label DSV_lblJavaE;
+
+    @FXML
+    private Label DSV_lblGolangE;
 
     @FXML
     private Label DSV_lblAve;
@@ -207,16 +229,16 @@ public class UICONTROLLER implements Initializable{
     private Button TTND_btnUpdate;
 
     @FXML
-    private TableView<?> TTND_tbl;
+    private TableView<User> TTND_tbl;
 
     @FXML
-    private TableColumn<?, ?> TTND_clmID;
+    private TableColumn<User, String> TTND_clmID;
 
     @FXML
-    private TableColumn<?, ?> TTND_clmName;
+    private TableColumn<User, String> TTND_clmName;
 
     @FXML
-    private TableColumn<?, ?> TTND_clmEmail;
+    private TableColumn<User, String> TTND_clmEmail;
 
     @FXML
     private Button TTND_btnFIrst;
@@ -234,7 +256,7 @@ public class UICONTROLLER implements Initializable{
     private TextField TTND_txtfFilter;
 
     @FXML
-    private ComboBox<?> TTND_cboxFilter;
+    private ComboBox<String> TTND_cboxFilter;
 
     @FXML
     private Label TTND_lblRoleE;
@@ -267,10 +289,10 @@ public class UICONTROLLER implements Initializable{
     private Label TTND_lblEmailE;
 
     @FXML
-    private ComboBox<?> TTND_cboxRole;
+    private ComboBox<String> TTND_cboxRole;
 
     @FXML
-    private ComboBox<?> TTND_cboxClass;
+    private ComboBox<String> TTND_cboxClass;
 
     @FXML
     private Pane TTTK_pane;
@@ -348,14 +370,22 @@ public class UICONTROLLER implements Initializable{
     private Label TTTK_lblRePassE;
 
     @FXML
-    private ComboBox<?> TTTK_cboxRole;
+    private ComboBox<String> TTTK_cboxRole;
     
-    @FXML
-    private Circle Mmenu_avt;
+    private User useing ;
     
+	public User getUseing() {
+		return useing;
+	}
+
+	public void setUseing(User useing) {
+		this.useing = useing;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		useing = UISIGNIN.getUseing();
 		
 		//------------------------------Below is UI part----------------------------------//
 		btnExit.setOnAction(e -> {System.exit(0);});
@@ -419,8 +449,63 @@ public class UICONTROLLER implements Initializable{
 			TTND_Pane.setDisable(false);
 			TTND_Pane.setVisible(true);
 		});
+		//--------------------Below is TTSV button part----------------------------//
+		TTSV_btnChangeAva.setOnMouseEntered(e -> {
+			Image img = new Image(getClass().getResourceAsStream("tenor.png"));
+			UISIGNIN.getScene().setCursor(new ImageCursor(img,100,100));
+		});
+		
+		TTSV_btnChangeAva.setOnMouseExited(e -> {
+			UISIGNIN.getScene().setCursor(Cursor.DEFAULT);
+		});
+		
+		TTSV_btnChangeAva.setOnAction(e -> {
+			try {
+				TTSV_ava.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage())));
+			} catch(Exception ex) {
+				ex.printStackTrace();
+				TTSV_ava.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
+			}
+		});
+		
+		TTSV_clmID.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
+		TTSV_clmName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+		TTSV_clmClass.setCellValueFactory(new PropertyValueFactory<Student, String>("classId"));
+		TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+		TTSV_btnAdd.setOnAction(e -> {
+			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), TTSV_txtfID.getText(), TTSV_ava.toString());
+			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+			TTSV_tbl.refresh();
+		});
+		TTSV_btnUpdate.setOnAction(e -> {
+			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?true:false, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText(), TTSV_txtfID.getText(), TTSV_ava.toString());
+			TTSV_tbl.setItems(FXCollections.observableArrayList(StudentModel.getAll()));
+			TTSV_tbl.refresh();
+		});
+		
+		TTSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
+				TTSV_txtfID.setText(newValue.getId());
+				TTSV_txtfName.setText(newValue.getName());
+				TTSV_cboxClass.getSelectionModel().select(newValue.getClassId());
+				TTSV_txtfEmail.setText(newValue.getEmail());
+				TTSV_txtfPhone.setText(newValue.getPhoneNumber());
+				TTSV_txtaAddress.setText(newValue.getAddress());
+			}
+			
+		});
 		
 		//--------------------Below is TTTK button part----------------------------//
+		TTTK_txtfID.setEditable(false);
+		TTTK_txtfID.setText(useing.getId());
+		TTTK_txtfName.setText(useing.getName());
+		TTTK_cboxRole.getSelectionModel().select(useing.getPermission());
+		TTTK_txtfEmail.setText(useing.getEmail());
+		TTTK_txtfPhone.setText(useing.getPhoneNumber());
+		if(useing.getSex()) TTTK_rdbtnMale.setSelected(true); else TTTK_rdbtnFemale.setSelected(true);
+		TTTK_txtaAddress.setText(useing.getAddress());
 		
 		TTTK_btnRefresh.setOnAction(e -> {
 			TTTK_txtfID.setText("");
@@ -442,6 +527,7 @@ public class UICONTROLLER implements Initializable{
 			TTTK_lblNameE.setText("");
 			TTTK_lblEmailE.setText("");
 			TTTK_lblPhoneE.setText("");
+
 			if(TTTK_txtfName.getText().isEmpty()) {
 				TTTK_lblNameE.setText("Tên không được để trống");
 				return;
@@ -459,6 +545,10 @@ public class UICONTROLLER implements Initializable{
 				return;
 			}
 			
+			User user = new User(TTTK_txtfID.getText(), useing.getPassword(), TTTK_txtfName.getText(), TTTK_rdbtnFemale.isSelected()?true:false , TTTK_txtfEmail.getText(), TTTK_txtfPhone.getText(),TTTK_txtaAddress.getText(), useing.getPermission(), useing.getImage());
+			useing = user;
+			UserModel.update(user);
+			
 		});
 		
 		TTTK_btnUpdatePass.setOnAction(e -> {
@@ -469,20 +559,41 @@ public class UICONTROLLER implements Initializable{
 			if(TTTK_txtfOldPass.getText().isEmpty()) {
 				TTTK_lblOldPassE.setText("Password hiện tại không được để trống");
 				return;
+			} else if(!useing.getPassword().equals(TTTK_txtfOldPass.getText())) {
+				TTTK_lblOldPassE.setText("Password không khớp với password hiện tại");
+				return;
 			} else if (TTTK_txtfNewPass.getText().isEmpty()) {
 				TTTK_lblNewPassE.setText("Password mới không được để trống");
 				return;
 			} else if(TTTK_txtfReNewPass.getText().isEmpty()) {
 				TTTK_lblRePassE.setText("Bắt buộc nhập lại password");
 				return;
-			} else if(!TTTK_txtfNewPass.getText().equals(TTTK_txtfOldPass.getText())) {
+			} else if(!TTTK_txtfNewPass.getText().equals(TTTK_txtfReNewPass.getText())) {
 				TTTK_lblRePassE.setText("Password không khớp với password trên");
 				return;
 			}
+			
+			User user = new User(useing.getId(), TTTK_txtfReNewPass.getText(),useing.getName(), useing.getSex(), useing.getEmail(), useing.getPhoneNumber(), useing.getAddress(), useing.getPermission(), useing.getImage());
+			useing = user;
+			UserModel.update(user);
 		});
 		//---------Below is Main Menu button----------//
+		Mmenu_btnChangeAvt.setOnMouseEntered(e -> {
+			Image img = new Image(getClass().getResourceAsStream("tenor.png"));
+			UISIGNIN.getScene().setCursor(new ImageCursor(img,100,100));
+		});
+		
+		Mmenu_btnChangeAvt.setOnMouseExited(e -> {
+			UISIGNIN.getScene().setCursor(Cursor.DEFAULT);
+		});
+		
 		Mmenu_btnChangeAvt.setOnAction(e -> {
-			SetImgForCircle.setThisAvar(Mmenu_avt, UISIGNIN.getStage());
+			try {
+				Mmenu_avt.setFill(new ImagePattern(SetImgForCircle.setThisAvar(UISIGNIN.getStage())));
+			} catch(Exception ex) {
+				ex.printStackTrace();
+				Mmenu_avt.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
+			}
 		});
 		
 		//---------Below is TTND button part----------//
@@ -518,7 +629,53 @@ public class UICONTROLLER implements Initializable{
 		
 		//-------Below is DSV button part----------//
 		
-	
+		
+		DSV_txtfID.setEditable(false);
+		DSV_clmID.setCellValueFactory(new PropertyValueFactory<Student, String>("id"));
+		DSV_clmName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
+		DSV_tbl.setItems( FXCollections.observableArrayList(StudentModel.getAll()));
+		DSV_btnUpdate.setOnAction(e -> {
+			DSV_lblNameE.setText("");
+			DSV_lblJSE.setText("");
+			DSV_lblJavaE.setText("");
+			DSV_lblGolangE.setText("");
+			if(Float.parseFloat(DSV_txtfJS.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
+				DSV_lblJSE.setText("Điểm phải nằm trong khoảng 0 - 10");
+				return;
+			} else if(Float.parseFloat(DSV_txtfJava.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
+				DSV_lblJavaE.setText("Điểm phải nằm trong khoảng 0 - 10");
+				return;
+			} else if(Float.parseFloat(DSV_txtfGo.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
+				DSV_lblGolangE.setText("Điểm phải nằm trong khoảng 0 - 10");
+				return;
+			} 
+			StudentModel.updateMarks(DSV_txtfID.getText(), Float.parseFloat(DSV_txtfJava.getText()), Float.parseFloat(DSV_txtfJS.getText()), Float.parseFloat(DSV_txtfGo.getText()));
+			DSV_lblAve.setText((Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3+"");
+			DSV_tbl.setItems( FXCollections.observableArrayList(StudentModel.getAll()));
+			DSV_tbl.refresh();
+		});	
+		
+		DSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Student> arg0, Student oldValue, Student newValue) {
+				DSV_txtfID.setText(newValue.getId());
+				DSV_txtfName.setText(newValue.getName());
+				DSV_txtfJava.setText(newValue.getJava()+"");
+				DSV_txtfJS.setText(newValue.getJavascript()+"");
+				DSV_txtfGo.setText(newValue.getGolang()+"");
+				DSV_lblAve.setText((Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3+"");
+			}
+			
+		});
+		DSV_btnFirst.setOnAction(e -> {
+			DSV_tbl.getSelectionModel().selectFirst();
+		});
+		DSV_btnLast.setOnAction(e -> {
+			DSV_tbl.getSelectionModel().selectLast();
+		});
+		
+		
 	}
 	
 	public void DisableAllPane() {

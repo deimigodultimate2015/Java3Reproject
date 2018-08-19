@@ -10,7 +10,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class SetImgForCircle {
-	public static void setThisAvar(Circle circle, Stage stage) {
+	public static Image setThisAvar(Stage stage) {
+		Image image = null;
 		FileChooser fchooser  = new FileChooser();
 		File file = fchooser.showOpenDialog(stage);
 		FileChooser.ExtensionFilter exFilter1 = new FileChooser.ExtensionFilter("PNG files (*.txt)", "*.png");
@@ -20,12 +21,14 @@ public class SetImgForCircle {
 		if(file != null) {
 			try {
 				System.out.println(file.getAbsolutePath());
-				Image img = new Image(new FileInputStream(file));
-				circle.setFill(new ImagePattern(img));
+				image = new Image(new FileInputStream(file.getAbsolutePath()));
+				System.out.println("is img null "+(image == null ? true : false));
 			} catch (Exception ex) {
 				ex.printStackTrace();
-			}
+			} 
 			
-		}
+		} 
+		
+		return image;
 	}
 }
