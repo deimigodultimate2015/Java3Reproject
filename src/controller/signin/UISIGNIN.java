@@ -163,6 +163,18 @@ public class UISIGNIN implements Initializable{
 			}
 		});
 		
+		lnkHelp.setOnAction(e -> {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/view/readme.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.show();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		});
+		
 		btnSignin.setOnAction( ez-> {
 			lblFail.setVisible(false);
 			if(chkboxRemember.isSelected()) {

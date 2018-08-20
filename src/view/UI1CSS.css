@@ -35,6 +35,7 @@
 }
 
 .button {
+	-fx-text-fill: #ffffff;
 	-fx-background-color:   #564B6F;
 	-fx-border-radius: 0px;
 	-fx-background-radius: 0px;
@@ -43,6 +44,17 @@
 .button: hover {
 	-fx-cursor: hand;
 	-fx-background-color:  	#98869E;
+	-fx-border-radius: 0px;
+	-fx-background-radius: 0px;
+
+}
+
+.button: pressed {
+	-fx-text-fill: #564b6f;
+	-fx-cursor: hand;
+	-fx-background-color:  	transparent;
+	-fx-border-width: 2;
+	-fx-border-color: 	#98869E;
 	-fx-border-radius: 0px;
 	-fx-background-radius: 0px;
 

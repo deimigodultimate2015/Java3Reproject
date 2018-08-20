@@ -318,7 +318,7 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="TTND_btnRefresh" layoutX="22.0" layoutY="508.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Làm mới" textFill="WHITE" />
+                  <Button fx:id="TTND_btnRefresh" layoutX="22.0" layoutY="508.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Lưu người dùng" textFill="WHITE" />
                   <Button fx:id="TTND_btnUpdate" layoutX="22.0" layoutY="550.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
                   <TableView fx:id="TTND_tbl" layoutX="393.0" layoutY="48.0" prefHeight="540.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
                      <columns>

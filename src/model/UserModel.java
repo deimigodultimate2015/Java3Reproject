@@ -111,7 +111,7 @@ public class UserModel {
             stmt = conn.prepareStatement(sqlInsert);
 
             stmt.setString(1, user.getId());
-            stmt.setString(2, user.getPassword());
+            stmt.setString(2, UserModel.createPassword());
             stmt.setString(3, user.getName());
             stmt.setBoolean(4, user.getSex());
             stmt.setString(5, user.getEmail());
