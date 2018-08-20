@@ -2,6 +2,7 @@ package controller.mainui;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -29,7 +30,15 @@ public class SetImgForCircle {
 				System.out.println(ex);
 			} 
 			
-		} 
+		} else {
+			if(StudentModel.getImageByID(ID) != null) {
+				try {
+					image = new Image(new FileInputStream(StudentModel.getImageByID(ID)));
+				} catch (FileNotFoundException e) {
+					System.out.println(e);
+				}
+			}
+		}
 		
 		return image;
 	}
@@ -51,7 +60,15 @@ public class SetImgForCircle {
 				System.out.println(ex);
 			} 
 			
-		} 
+		} else {
+			if(UserModel.getImageByID(ID) != null) {
+				try {
+					image = new Image(new FileInputStream(UserModel.getImageByID(ID)));
+				} catch (FileNotFoundException e) {
+					System.out.println(e);
+				}
+			}
+		}
 		
 		return image;
 	}

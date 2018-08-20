@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,6 +26,23 @@ public class StudentModel {
 
     static{
         conn = model.DBUtils.getConnection();
+    }
+    
+    public static String getImageByID (String ID) {
+    	String imgPath = null;
+    	Connection conn = DBUtils.getConnection();
+    	try {
+    		Statement ps = conn.createStatement();
+    		ResultSet rs = ps.executeQuery("select image FROM student WHERE id = '"+ID+"'");
+    		while(rs.next()) {
+    			imgPath = rs.getString(1);
+    		}
+    		
+    	} catch(Exception ex) {
+    		System.out.println(ex);
+    	}
+    	
+    	return imgPath;
     }
     
     public static void updateAvatar(String ID, String avatar) {

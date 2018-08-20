@@ -118,7 +118,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Pane fx:id="TTSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
+            <Pane fx:id="TTSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
                <children>
                   <TextField fx:id="TTSV_txtfID" layoutX="167.0" layoutY="204.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="205.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Sinh viên" textFill="WHITE">
@@ -154,8 +154,8 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="TTSV_btnAdd" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Thêm sinh viên" textFill="WHITE" />
-                  <Button fx:id="TTSV_btnUpdate" layoutX="14.0" layoutY="596.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
+                  <Button fx:id="TTSV_btnAdd" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="159.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Thêm sinh viên" textFill="WHITE" />
+                  <Button fx:id="TTSV_btnUpdate" layoutX="184.0" layoutY="562.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="175.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
                   <TableView fx:id="TTSV_tbl" layoutX="393.0" layoutY="48.0" prefHeight="539.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
                      <columns>
                         <TableColumn fx:id="TTSV_clmID" prefWidth="75.0" text="ID Sinh Viên" />
@@ -206,6 +206,7 @@
                   <RadioButton fx:id="TTSV_rdbtnMale" layoutX="255.0" layoutY="459.0" mnemonicParsing="false" text="Not Female" toggleGroup="$TTSV_tgroup" />
                   <Label fx:id="TTSV_lblClassE" alignment="CENTER" layoutX="17.0" layoutY="330.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <ComboBox fx:id="TTSV_cboxClass" layoutX="167.0" layoutY="304.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
+                  <Button fx:id="TTSV_btnTrueRefesh" layoutX="14.0" layoutY="596.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Làm mới" textFill="WHITE" />
                </children>
             </Pane>
             <Pane fx:id="DSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
@@ -318,8 +319,8 @@
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <Button fx:id="TTND_btnRefresh" layoutX="22.0" layoutY="508.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Thêm người dùng" textFill="WHITE" />
-                  <Button fx:id="TTND_btnUpdate" layoutX="22.0" layoutY="550.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
+                  <Button fx:id="TTND_btnRefresh" layoutX="22.0" layoutY="475.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Thêm người dùng" textFill="WHITE" />
+                  <Button fx:id="TTND_btnUpdate" layoutX="22.0" layoutY="511.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Cập nhật" textFill="WHITE" />
                   <TableView fx:id="TTND_tbl" layoutX="393.0" layoutY="48.0" prefHeight="540.0" prefWidth="645.0" stylesheets="@TABLEVIEW.css">
                      <columns>
                         <TableColumn fx:id="TTND_clmID" prefWidth="75.0" text="ID người dùng" />
@@ -372,9 +373,10 @@
                   <Label fx:id="TTND_lblIDE" alignment="CENTER" layoutX="17.0" layoutY="125.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTND_lblEmailE" alignment="CENTER" layoutX="12.0" layoutY="277.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <ComboBox fx:id="TTND_cboxRole" layoutX="167.0" layoutY="199.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
+                  <Button fx:id="TTND_btnTrueRefresh" layoutX="22.0" layoutY="549.0" mnemonicParsing="false" prefWidth="330.0" style="-fx-background-radius: 0;" stylesheets="@UI1CSS.css" text="Làm mới" textFill="WHITE" />
                </children>
             </Pane>
-            <Pane fx:id="TTTK_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
+            <Pane fx:id="TTTK_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
                <children>
                   <TextField fx:id="TTTK_txtfID" layoutX="167.0" layoutY="124.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Người dùng" textFill="WHITE">

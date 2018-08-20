@@ -373,9 +373,14 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private TextField DSV_txtfFilter;
     
+    @FXML
+    private Button TTND_btnTrueRefresh;
     
     @FXML
     private TableColumn<Student, String> DSV_clmTB;
+    
+    @FXML
+    private Button TTSV_btnTrueRefesh;
     
     private User useing ;
     
@@ -394,7 +399,10 @@ public class UICONTROLLER implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		useing = UISIGNIN.getUseing();
-		
+		Mmenu_btnAccountInfo.setStyle("-fx-background-color: #98869E");
+		Mmenu_MarkManage.setStyle(null);
+		Mmenu_SInfoManage.setStyle(null);
+		Mmenu_UserManage.setStyle(null);
 		
 		//------------------------------Below is UI part----------------------------------//
 		btnExit.setOnAction(e -> {System.exit(0);});
@@ -450,6 +458,7 @@ public class UICONTROLLER implements Initializable{
 			TTTK_pane.setVisible(true);
 		});
 		
+		
 		Mmenu_SInfoManage.setOnAction(e -> {
 			if(!useing.getPermission().equalsIgnoreCase("manager")) {
 				Alert alr = new Alert(AlertType.WARNING);
@@ -491,24 +500,22 @@ public class UICONTROLLER implements Initializable{
 			TTND_Pane.setDisable(false);
 			TTND_Pane.setVisible(true);
 		});
+		
+		Mmenu_btnAccountInfo.fire();
 		//--------------------Below is TTSV button part----------------------------//
 		ObservableList<String> olistClass = FXCollections.observableArrayList();
 		for(StudyClass sclass : StudyClassModel.getAll()) {
 			olistClass.add(sclass.getId());
 		}
 		
-	    ContextMenu TTSV_cmenu2 = new ContextMenu();
-	    MenuItem TTSV_ite21 = new MenuItem("Làm mới");
-	    TTSV_cmenu2.getItems().add(TTSV_ite21);
-	    TTSV_ite21.setOnAction(e -> {
+	    
+	    TTSV_btnTrueRefesh.setOnAction(e -> {
 	    	TTSV_txtfID.setText("");
 			TTSV_txtfName.setText("");
 			TTSV_txtfEmail.setText("");
 			TTSV_txtfPhone.setText("");
 			TTSV_txtaAddress.setText("");
 	    });
-
-	    TTSV_btnAdd.setContextMenu(TTSV_cmenu2);
 	    
 	    MenuItem TTSV_ite1 = new MenuItem("Xóa sinh viên này");
 	    ContextMenu TTSV_cmenu = new ContextMenu();
@@ -582,7 +589,7 @@ public class UICONTROLLER implements Initializable{
 			TTSV_lblIDE.setText("");
 			TTSV_lblEmailE.setText("");
 			if(CheckForUser.isThisStudentIDexist(TTSV_txtfID.getText())) {
-				TTSV_lblIDE.setText("ID này đã tại");
+				TTSV_lblIDE.setText("ID này đã tồn tại");
 				return;
 			} else if (TTSV_txtfName.getText().isEmpty()) {
 				TTSV_lblNameE.setText("Tên không được để trống");
@@ -632,17 +639,18 @@ public class UICONTROLLER implements Initializable{
 				return;
 			} 
 			StudentModel.updateÌnfo(TTSV_txtfName.getText(), TTSV_rdbtnFemale.isSelected()?false:true, TTSV_cboxClass.getSelectionModel().getSelectedItem(), TTSV_txtfEmail.getText(), TTSV_txtfPhone.getText(), TTSV_txtaAddress.getText() , TTSV_txtfID.getText());
+			Alert alr = new Alert(AlertType.INFORMATION);
+			alr.setTitle("Cập nhật thông tin sinh viên");
+			alr.setHeaderText("Cập nhật sinh viên thành công");
+			alr.setContentText("Sinh viên "+TTSV_txtfID.getText()+" đã được cập nhật thông tin");
+			alr.show();
 			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
 			TTSV_tbl.setItems(olistTTSV);
 			TTSV_tbl.refresh();
 			letFilter(TTSV_tbl, TTSV_txtfFilter);
 			TTSV_tbl.getSelectionModel().select(0);
 			TTSV_selectByNow();
-			Alert alr = new Alert(AlertType.INFORMATION);
-			alr.setTitle("Cập nhật thông tin sinh viên");
-			alr.setHeaderText("Cập nhật sinh viên thành công");
-			alr.setContentText("Sinh viên "+TTSV_txtfID.getText()+" đã được cập nhật thông tin");
-			alr.show();
+			
 		});
 		
 		TTSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
@@ -816,10 +824,7 @@ public class UICONTROLLER implements Initializable{
 		
 		//---------Below is TTND button part----------//
 		
-		ContextMenu TTND_cmenu2 = new ContextMenu();
-	    MenuItem TTND_ite21 = new MenuItem("Làm mới");
-	    TTND_cmenu2.getItems().add(TTSV_ite21);
-	    TTND_ite21.setOnAction(e -> {
+	    TTND_btnTrueRefresh.setOnAction(e -> {
 	    	TTND_txtfID.setText("");
 			TTND_txtfName.setText("");
 			TTND_txtfEmail.setText("");
@@ -827,7 +832,6 @@ public class UICONTROLLER implements Initializable{
 			TTND_txtaAddress.setText("");
 	    });
 
-	    TTND_btnRefresh.setContextMenu(TTND_cmenu2);
 		
 		ContextMenu TTND_cmenu = new ContextMenu();
 		MenuItem TTND_mtmDelete = new MenuItem("Xóa người dùng này");
@@ -850,16 +854,17 @@ public class UICONTROLLER implements Initializable{
 					return;
 				} else {
 					UserModel.delete(TTND_tbl.getSelectionModel().getSelectedItem().getId());
-					olistTTND = FXCollections.observableArrayList(UserModel.getAll());
-					TTND_tbl.setItems(olistTTND);
-					TTND_tbl.refresh();
-					letFilterUser(TTND_tbl, TTND_txtfFilter);
-					TTND_btnFIrst.fire();
 					Alert alr = new Alert(AlertType.CONFIRMATION);
 					alr.setTitle("Xác nhận");
 					alr.setHeaderText("Xóa thành công");
 					alr.setContentText("Người dùng đã bị xóa");
 					alr.show();
+					olistTTND = FXCollections.observableArrayList(UserModel.getAll());
+					TTND_tbl.setItems(olistTTND);
+					TTND_tbl.refresh();
+					letFilterUser(TTND_tbl, TTND_txtfFilter);
+					TTND_btnFIrst.fire();
+					
 					return;
 				}
 			});
@@ -882,16 +887,16 @@ public class UICONTROLLER implements Initializable{
 					return;
 				} else {
 					UserModel.resetPassword(TTND_tbl.getSelectionModel().getSelectedItem().getId());
-					olistTTND = FXCollections.observableArrayList(UserModel.getAll());
-					TTND_tbl.setItems(olistTTND);
-					TTND_tbl.refresh();
-					letFilterUser(TTND_tbl, TTND_txtfFilter);
-					TTND_btnFIrst.fire();
 					Alert alr = new Alert(AlertType.CONFIRMATION);
 					alr.setTitle("Xác nhận");
 					alr.setHeaderText("tái lập thành công");
 					alr.setContentText("mật khẩu đã được tái lập");
 					alr.show();
+					olistTTND = FXCollections.observableArrayList(UserModel.getAll());
+					TTND_tbl.setItems(olistTTND);
+					TTND_tbl.refresh();
+					letFilterUser(TTND_tbl, TTND_txtfFilter);
+					TTND_btnFIrst.fire();
 					return;
 				}
 			});
@@ -934,19 +939,19 @@ public class UICONTROLLER implements Initializable{
 				return;
 			}
 			User oldVl = TTND_tbl.getSelectionModel().getSelectedItem();
-			User user = new User(TTND_txtfID.getText(),oldVl.getPassword() , TTND_txtfName.getText(),  TTSV_rdbtnFemale.isSelected()?false:true , TTND_txtfEmail.getText(), TTND_txtfPhone.getText(), TTND_txtaAddress.getText(), oldVl.getPermission(), oldVl.getImage());
+			User user = new User(TTND_txtfID.getText(),oldVl.getPassword() , TTND_txtfName.getText(),  TTSV_rdbtnFemale.isSelected()?false:true , TTND_txtfEmail.getText(), TTND_txtfPhone.getText(), TTND_txtaAddress.getText(), TTND_cboxRole.getSelectionModel().getSelectedItem(), oldVl.getImage());
 			UserModel.update(user);
+			Alert alr = new Alert(AlertType.INFORMATION);
+			alr.setTitle("Cập nhật thông tin tài khoản");
+			alr.setHeaderText("Cập nhật thông tin tài khoản thành công");
+			alr.setContentText("Tài khoản "+TTND_txtfID.getText()+" đã được cập nhật lại thông tin");
+			alr.show();
 			olistTTND = FXCollections.observableArrayList(UserModel.getAll());
 			TTND_tbl.setItems(olistTTND);
 			TTND_tbl.refresh();
 			letFilterUser(TTND_tbl, TTND_txtfFilter);
 			TTND_tbl.getSelectionModel().select(0);
 			TTND_selectByNow();
-			Alert alr = new Alert(AlertType.INFORMATION);
-			alr.setTitle("Cập nhật thông tin tài khoản");
-			alr.setHeaderText("Cập nhật thông tin tài khoản thành công");
-			alr.setContentText("Tài khoản "+TTND_txtfID.getText()+" đã được cập nhật lại thông tin");
-			alr.show();
 		});
 		
 		TTND_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
@@ -993,19 +998,20 @@ public class UICONTROLLER implements Initializable{
 				return;
 			}
 			User oldVl = TTND_tbl.getSelectionModel().getSelectedItem();
-			User user = new User(TTND_txtfID.getText(),oldVl.getPassword() , TTND_txtfName.getText(),  TTSV_rdbtnFemale.isSelected()?false:true , TTND_txtfEmail.getText(), TTND_txtfPhone.getText(), TTND_txtaAddress.getText(), oldVl.getPermission(), oldVl.getImage());
+			User user = new User(TTND_txtfID.getText(),oldVl.getPassword() , TTND_txtfName.getText(),  TTSV_rdbtnFemale.isSelected()?false:true , TTND_txtfEmail.getText(), TTND_txtfPhone.getText(), TTND_txtaAddress.getText(), TTND_cboxRole.getSelectionModel().getSelectedItem(), oldVl.getImage());
 			UserModel.insert(user);
+			Alert alr = new Alert(AlertType.INFORMATION);
+			alr.setTitle("Thêm tài khoản");
+			alr.setHeaderText("Thêm tài khoản thành công");
+			alr.setContentText("Tài khoản "+TTTK_txtfID.getText()+" đã được thêm vào danh sách");
+			alr.show();
 			olistTTND = FXCollections.observableArrayList(UserModel.getAll());
 			TTND_tbl.setItems(olistTTND);
 			TTND_tbl.refresh();
 			letFilterUser(TTND_tbl, TTND_txtfFilter);
 			TTND_tbl.getSelectionModel().select(0);
 			TTND_selectByNow();
-			Alert alr = new Alert(AlertType.INFORMATION);
-			alr.setTitle("Thêm tài khoản");
-			alr.setHeaderText("Thêm tài khoản thành công");
-			alr.setContentText("Tài khoản "+TTTK_txtfID.getText()+" đã được thêm vào danh sách");
-			alr.show();
+			
 		});
 		
 		TTND_btnFIrst.setOnAction(e->{
@@ -1082,6 +1088,11 @@ public class UICONTROLLER implements Initializable{
 				return;
 			}
 			StudentModel.updateMarks(DSV_txtfID.getText(), Float.parseFloat(DSV_txtfJava.getText()), Float.parseFloat(DSV_txtfJS.getText()), Float.parseFloat(DSV_txtfGo.getText()));
+			Alert alr = new Alert(AlertType.INFORMATION);
+			alr.setTitle("Cập nhật điểm");
+			alr.setHeaderText("Cập nhật điểm thành công");
+			alr.setContentText("Sinh viên "+DSV_txtfID.getText()+" đã được cập nhật lại điểm");
+			alr.show();
 			DSV_lblAve.setText(String.format("%.02f", (Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3));
 			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
 			DSV_tbl.setItems(olistTTSV);
@@ -1089,11 +1100,7 @@ public class UICONTROLLER implements Initializable{
 			letFilter(DSV_tbl, DSV_txtfFilter);
 			DSV_tbl.getSelectionModel().select(0);
 			DSV_selectByNow();
-			Alert alr = new Alert(AlertType.INFORMATION);
-			alr.setTitle("Cập nhật điểm");
-			alr.setHeaderText("Cập nhật điểm thành công");
-			alr.setContentText("Sinh viên "+DSV_txtfID.getText()+" đã được cập nhật lại điểm");
-			alr.show();
+			
 		});	
 		
 		DSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {

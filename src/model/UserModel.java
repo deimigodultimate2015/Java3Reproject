@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,10 +21,14 @@ public class UserModel {
     private static String sqlUpdate = "UPDATE account SET password = ?, name = ?, sex = ?, email = ?, phone_number = ?, address = ?, permission = ?, image = ? WHERE id= ?";
     private static String sqlUpdateRSP = "UPDATE account SET password = ?  WHERE id= ?";
     private static String sqlDelete = "DELETE FROM account WHERE id = ?";
-
+    
     static {
         conn = DBUtils.getConnection();
     } 
+    
+    public static void main(String[]args) {
+    	System.out.println(UserModel.getImageByID("AD001"));
+    }
     
     public static String createPassword() {
 		int pw = 0;
@@ -33,6 +38,23 @@ public class UserModel {
 		}
 		return "" + pw;
 	}
+    
+    public static String getImageByID (String ID) {
+    	String imgPath = null;
+    	Connection conn = DBUtils.getConnection();
+    	try {
+    		Statement ps = conn.createStatement();
+    		ResultSet rs = ps.executeQuery("select image FROM account WHERE id = '"+ID+"'");
+    		while(rs.next()) {
+    			imgPath = rs.getString(1);
+    		}
+    		
+    	} catch(Exception ex) {
+    		System.out.println(ex);
+    	}
+    	
+    	return imgPath;
+    }
 
     public static void updateAvatar(String ID, String avatar) {
     	Connection conn = DBUtils.getConnection();
