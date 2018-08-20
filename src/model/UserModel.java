@@ -18,7 +18,7 @@ public class UserModel {
     private static String sqlSelectAll = "SELECT * FROM account WHERE permission LIKE ?";
     private static String sqlInsert = "INSERT INTO account VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static String sqlUpdate = "UPDATE account SET password = ?, name = ?, sex = ?, email = ?, phone_number = ?, address = ?, permission = ?, image = ? WHERE id= ?";
-    private static String sqlUpdateRSP = "UPDATE account SET password = ?, WHERE id= ?";
+    private static String sqlUpdateRSP = "UPDATE account SET password = ?  WHERE id= ?";
     private static String sqlDelete = "DELETE FROM account WHERE id = ?";
 
     static {
@@ -151,11 +151,11 @@ public class UserModel {
         }
     }
     
-    public static boolean resetPassword(String ID, String pass) {
+    public static boolean resetPassword(String ID) {
     	 try {
              stmt = conn.prepareStatement(sqlUpdateRSP);
-             stmt.setString(1, pass);
-             stmt.setString(9, ID);
+             stmt.setString(1, UserModel.createPassword());
+             stmt.setString(2, ID);
              stmt.executeUpdate();
              
              return true;

@@ -2,6 +2,7 @@ package controller.mainui;
 
 import java.awt.Window.Type;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import controller.signin.UISIGNIN;
@@ -28,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -745,7 +747,70 @@ public class UICONTROLLER implements Initializable{
 		ContextMenu TTND_cmenu = new ContextMenu();
 		MenuItem TTND_mtmDelete = new MenuItem("Xóa người dùng này");
 		MenuItem TTND_mtmReset = new MenuItem("Thiết lập lại mật khẩu cho người này");
+		TTND_cmenu.getItems().addAll(TTND_mtmDelete, TTND_mtmReset);
+		TTND_tbl.setContextMenu(TTND_cmenu);
+		TTND_mtmDelete.setOnAction(e -> {
+			TextInputDialog tid = new TextInputDialog();
+			tid.setTitle("Xác nhận xóa người dùng");
+			tid.setHeaderText("Xác nhận xóa người dùng");
+			tid.setContentText("Nhập lại ID của người muốn xóa: ");
+			Optional<String> result = tid.showAndWait();
+			result.ifPresent(name -> {
+				if(!name.equals(TTND_tbl.getSelectionModel().getSelectedItem().getId())) {
+					Alert alr = new Alert(AlertType.ERROR);
+					alr.setTitle("Xác nhận");
+					alr.setHeaderText("Xóa không thành công");
+					alr.setContentText("Đã nhập sai ID");
+					alr.show();
+					return;
+				} else {
+					UserModel.delete(TTND_tbl.getSelectionModel().getSelectedItem().getId());
+					olistTTND = FXCollections.observableArrayList(UserModel.getAll());
+					TTND_tbl.setItems(olistTTND);
+					TTND_tbl.refresh();
+					letFilterUser(TTND_tbl, TTND_txtfFilter);
+					TTND_btnFIrst.fire();
+					Alert alr = new Alert(AlertType.CONFIRMATION);
+					alr.setTitle("Xác nhận");
+					alr.setHeaderText("Xóa thành công");
+					alr.setContentText("Người dùng đã bị xóa");
+					alr.show();
+					return;
+				}
+			});
+			
+		});
 		
+		TTND_mtmReset.setOnAction(e -> {
+			TextInputDialog tid = new TextInputDialog();
+			tid.setTitle("Xác nhận tái lập mật khẩu người dùng");
+			tid.setHeaderText("Xác nhận tái lập mật khẩu người dùng");
+			tid.setContentText("Nhập lại ID của người muốn tái lập mật khẩu: ");
+			Optional<String> result = tid.showAndWait();
+			result.ifPresent(name -> {
+				if(!name.equals(TTND_tbl.getSelectionModel().getSelectedItem().getId())) {
+					Alert alr = new Alert(AlertType.ERROR);
+					alr.setTitle("Xác nhận");
+					alr.setHeaderText("tái lập không thành công");
+					alr.setContentText("Đã nhập sai ID");
+					alr.show();
+					return;
+				} else {
+					UserModel.resetPassword(TTND_tbl.getSelectionModel().getSelectedItem().getId());
+					olistTTND = FXCollections.observableArrayList(UserModel.getAll());
+					TTND_tbl.setItems(olistTTND);
+					TTND_tbl.refresh();
+					letFilterUser(TTND_tbl, TTND_txtfFilter);
+					TTND_btnFIrst.fire();
+					Alert alr = new Alert(AlertType.CONFIRMATION);
+					alr.setTitle("Xác nhận");
+					alr.setHeaderText("tái lập thành công");
+					alr.setContentText("mật khẩu đã được tái lập");
+					alr.show();
+					return;
+				}
+			});
+		});
 		
 		TTND_txtfID.setEditable(false);
 		TTND_cboxRole.setEditable(false);
@@ -958,7 +1023,6 @@ public class UICONTROLLER implements Initializable{
 	
 	public void letFilter(TableView<Student> tbl, TextField txtf) {
 		FilteredList<Student> ftlistTTSV = new FilteredList<>(olistTTSV, p -> true);
-//		TTSV_txtfFilter.setText("haiz");
 		txtf.textProperty().addListener((observable, oldValue, newValue) -> {
 			ftlistTTSV.setPredicate(student -> {
 				if(newValue == null || newValue.isEmpty() ) {
@@ -983,7 +1047,6 @@ public class UICONTROLLER implements Initializable{
 	
 	public void letFilterUser(TableView<User> tbl, TextField txtf) {
 		FilteredList<User> ftlistTTSV = new FilteredList<>(olistTTND, p -> true);
-//		TTSV_txtfFilter.setText("haiz");
 		txtf.textProperty().addListener((observable, oldValue, newValue) -> {
 			ftlistTTSV.setPredicate(student -> {
 				if(newValue == null || newValue.isEmpty() ) {
