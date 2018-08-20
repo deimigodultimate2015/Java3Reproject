@@ -370,6 +370,7 @@ public class UICONTROLLER implements Initializable{
     @FXML
     private TextField DSV_txtfFilter;
     
+    
     @FXML
     private TableColumn<Student, String> DSV_clmTB;
     
@@ -741,6 +742,10 @@ public class UICONTROLLER implements Initializable{
 		}
 		
 		//---------Below is TTND button part----------//
+		ContextMenu TTND_cmenu = new ContextMenu();
+		MenuItem TTND_mtmDelete = new MenuItem("Xóa người dùng này");
+		MenuItem TTND_mtmReset = new MenuItem("Thiết lập lại mật khẩu cho người này");
+		
 		
 		TTND_txtfID.setEditable(false);
 		TTND_cboxRole.setEditable(false);

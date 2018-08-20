@@ -129,9 +129,9 @@ public class StudentModel {
             stmt.setBoolean(3, sex);
             stmt.setString(4, classID);
             stmt.setString(5, email);
-            stmt.setString(6, address);
-            stmt.setString(7, phone);
-            stmt.setString(8, address);
+            stmt.setString(6, phone);
+            stmt.setString(7, address);
+            stmt.setString(8, image);
             
             stmt.execute();
             model.StudentModel.insertMarks(id);

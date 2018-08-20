@@ -18,11 +18,21 @@ public class UserModel {
     private static String sqlSelectAll = "SELECT * FROM account WHERE permission LIKE ?";
     private static String sqlInsert = "INSERT INTO account VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static String sqlUpdate = "UPDATE account SET password = ?, name = ?, sex = ?, email = ?, phone_number = ?, address = ?, permission = ?, image = ? WHERE id= ?";
+    private static String sqlUpdateRSP = "UPDATE account SET password = ?, WHERE id= ?";
     private static String sqlDelete = "DELETE FROM account WHERE id = ?";
 
     static {
         conn = DBUtils.getConnection();
     } 
+    
+    public static String createPassword() {
+		int pw = 0;
+		for (int i = 0; i < 6; i++) {
+			int rd = (int) (Math.random()*10);
+			pw += rd * Math.pow(10, i);
+		}
+		return "" + pw;
+	}
 
     public static void updateAvatar(String ID, String avatar) {
     	Connection conn = DBUtils.getConnection();
@@ -122,7 +132,6 @@ public class UserModel {
     public static boolean update(User user) {
         try {
             stmt = conn.prepareStatement(sqlUpdate);
-
             stmt.setString(1, user.getPassword());
             stmt.setString(2, user.getName());
             stmt.setBoolean(3, user.getSex());
@@ -140,6 +149,20 @@ public class UserModel {
             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+    
+    public static boolean resetPassword(String ID, String pass) {
+    	 try {
+             stmt = conn.prepareStatement(sqlUpdateRSP);
+             stmt.setString(1, pass);
+             stmt.setString(9, ID);
+             stmt.executeUpdate();
+             
+             return true;
+         } catch (SQLException ex) {
+             Logger.getLogger(UserModel.class.getName()).log(Level.SEVERE, null, ex);
+             return false;
+         }
     }
 
     public static boolean delete(String id) {
