@@ -1,5 +1,6 @@
 package controller.mainui;
 
+import java.awt.Window.Type;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -428,25 +431,49 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		Mmenu_btnAccountInfo.setOnAction(e -> {
-//			if(!useing.getPermission().)
+//			if(!useing.getPermission().equalsIgnoreCase(anotherString))
 			DisableAllPane();
 			TTTK_pane.setDisable(false);
 			TTTK_pane.setVisible(true);
 		});
 		
 		Mmenu_SInfoManage.setOnAction(e -> {
+			if(!useing.getPermission().equalsIgnoreCase("manager")) {
+				Alert alr = new Alert(AlertType.WARNING);
+				alr.setTitle("Lỗi phân quyền");
+				alr.setHeaderText("Thuộc phân quyền phòng đào tạo");
+				alr.setContentText("Người dùng buộc phải thuộc phần quyền phòng đào tạo nếu muốn xem nguồn dữ liệu này");
+				alr.show();
+				return;
+			}
 			DisableAllPane();
 			TTSV_pane.setDisable(false);
 			TTSV_pane.setVisible(true);
 		});
 		
 		Mmenu_MarkManage.setOnAction(e -> {
+			if(!useing.getPermission().equalsIgnoreCase("teacher")) {
+				Alert alr = new Alert(AlertType.WARNING);
+				alr.setTitle("Lỗi phân quyền");
+				alr.setHeaderText("Thuộc phân quyền giảng viên");
+				alr.setContentText("Người dùng buộc phải thuộc phần quyền giảng viên nếu muốn xem nguồn dữ liệu này");
+				alr.show();
+				return;
+			}
 			DisableAllPane();
 			DSV_pane.setDisable(false);
 			DSV_pane.setVisible(true);
 		});
 		
 		Mmenu_UserManage.setOnAction(e -> {
+			if(!useing.getPermission().equalsIgnoreCase("admin")) {
+				Alert alr = new Alert(AlertType.WARNING);
+				alr.setTitle("Lỗi phân quyền");
+				alr.setHeaderText("Thuộc phân quyền quản trị hệ thống");
+				alr.setContentText("Người dùng buộc phải thuộc phần quyền quản trị hệ thống nếu muốn xem nguồn dữ liệu này");
+				alr.show();
+				return;
+			}
 			DisableAllPane();
 			TTND_Pane.setDisable(false);
 			TTND_Pane.setVisible(true);
