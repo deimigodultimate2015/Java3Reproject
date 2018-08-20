@@ -605,7 +605,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr2 = new Alert(AlertType.INFORMATION);
 			alr2.setTitle("Thêm sinh viên");
 			alr2.setHeaderText("Hãy chọn ảnh đại diện cho sinh viên mới của bạn");
-			alr2.setContentText("Chọn ảnh đại diện mới cho sinh viên "+TTSV_txtfID.getText());
+			alr2.setContentText("Chọn ảnh đại diện mới cho sinh viên ");
 			alr2.showAndWait();
 			SetImgForCircle.setThisAvar(UISIGNIN.getStage(), TTSV_txtfID.getText());
 			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
@@ -642,7 +642,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Cập nhật thông tin sinh viên");
 			alr.setHeaderText("Cập nhật sinh viên thành công");
-			alr.setContentText("Sinh viên "+TTSV_txtfID.getText()+" đã được cập nhật thông tin");
+			alr.setContentText("Sinh viên đã được cập nhật thông tin");
 			alr.show();
 			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
 			TTSV_tbl.setItems(olistTTSV);
@@ -760,7 +760,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Cập nhật thông tin tài khoản");
 			alr.setHeaderText("Cập nhật thông tin tài khoản thành công");
-			alr.setContentText("Tài khoản "+TTTK_txtfID.getText()+" đã được cập nhật lại thông tin");
+			alr.setContentText("Tài khoản đã được cập nhật lại thông tin");
 			alr.show();
 		});
 		
@@ -793,7 +793,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Cập nhật mật khẩu tài khoản");
 			alr.setHeaderText("Cập nhật mật khẩu tài khoản thành công");
-			alr.setContentText("Tài khoản "+TTTK_txtfID.getText()+" đã được cập nhật lại mật khẩu");
+			alr.setContentText("Tài khoản đã được cập nhật lại mật khẩu");
 			alr.show();
 		});
 		
@@ -944,7 +944,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Cập nhật thông tin tài khoản");
 			alr.setHeaderText("Cập nhật thông tin tài khoản thành công");
-			alr.setContentText("Tài khoản "+TTND_txtfID.getText()+" đã được cập nhật lại thông tin");
+			alr.setContentText("Tài khoản đã được cập nhật lại thông tin");
 			alr.show();
 			olistTTND = FXCollections.observableArrayList(UserModel.getAll());
 			TTND_tbl.setItems(olistTTND);
@@ -1003,7 +1003,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Thêm tài khoản");
 			alr.setHeaderText("Thêm tài khoản thành công");
-			alr.setContentText("Tài khoản "+TTTK_txtfID.getText()+" đã được thêm vào danh sách");
+			alr.setContentText("Tài khoản đã được thêm vào danh sách");
 			alr.show();
 			olistTTND = FXCollections.observableArrayList(UserModel.getAll());
 			TTND_tbl.setItems(olistTTND);
@@ -1091,7 +1091,7 @@ public class UICONTROLLER implements Initializable{
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Cập nhật điểm");
 			alr.setHeaderText("Cập nhật điểm thành công");
-			alr.setContentText("Sinh viên "+DSV_txtfID.getText()+" đã được cập nhật lại điểm");
+			alr.setContentText("Sinh viên đã được cập nhật lại điểm");
 			alr.show();
 			DSV_lblAve.setText(String.format("%.02f", (Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3));
 			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
