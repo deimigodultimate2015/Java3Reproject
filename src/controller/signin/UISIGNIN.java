@@ -141,6 +141,7 @@ public class UISIGNIN implements Initializable{
 		});
 		
 		lnkHelp1.setOnAction(e -> {
+			lnkHelp1.setVisited(false);
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/view/DBFXML.fxml"));
 				scene1 = new Scene(root);
@@ -164,6 +165,7 @@ public class UISIGNIN implements Initializable{
 		});
 		
 		lnkHelp.setOnAction(e -> {
+			lnkHelp.setVisited(false);
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/view/readme.fxml"));
 				Scene scene = new Scene(root);

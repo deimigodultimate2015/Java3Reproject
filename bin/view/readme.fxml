@@ -28,6 +28,8 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="- Các chức năng: " />
+                        <Label text="+ Làm mới đơn(form) (thuộc tab quản lí thông tin sinh viên) : click chuột phải vào nút thêm sinh viên" />
+                        <Label layoutX="20.0" layoutY="37.0" text="+ Làm mới đơn(form) (thuộc tab quản lí người dùng) : click chuột phải vào nút thêm người dùng để" />
                         <Label text="+ Xóa sinh viên (thuộc tab quản lí thông tin sinh viên) : click chuột phải vào table để xóa" />
                         <Label text="+ Xóa người dùng (thuộc tab quản lí người dùng) : click chuột phải vào table để xóa" />
                         <Label text="+ Tái lập (Reset) mật khẩu (thuộc tab quản lí người dùng) : click chuột phải vào table để tái lập" />

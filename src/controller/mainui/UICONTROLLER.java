@@ -1,6 +1,5 @@
 package controller.mainui;
 
-import java.awt.Window.Type;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -12,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -33,6 +33,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -394,6 +395,7 @@ public class UICONTROLLER implements Initializable{
 		// TODO Auto-generated method stub
 		useing = UISIGNIN.getUseing();
 		
+		
 		//------------------------------Below is UI part----------------------------------//
 		btnExit.setOnAction(e -> {System.exit(0);});
 		btnExit.setOnMouseEntered(e -> {
@@ -413,6 +415,9 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		Mmenu_SInfoManage.setOnMousePressed(e -> {
+			if(!useing.getPermission().equalsIgnoreCase("manager")) {
+				return;
+			}
 			Mmenu_SInfoManage.setStyle("-fx-background-color: #98869E");
 			Mmenu_btnAccountInfo.setStyle(null);
 			Mmenu_MarkManage.setStyle(null);
@@ -420,6 +425,9 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		Mmenu_MarkManage.setOnMousePressed(e -> {
+			if(!useing.getPermission().equalsIgnoreCase("teacher")) {
+				return;
+			}
 			Mmenu_MarkManage.setStyle("-fx-background-color: #98869E");
 			Mmenu_btnAccountInfo.setStyle(null);
 			Mmenu_SInfoManage.setStyle(null);
@@ -427,6 +435,9 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		Mmenu_UserManage.setOnMousePressed(e -> {
+			if(!useing.getPermission().equalsIgnoreCase("admin")) {
+				return;
+			}
 			Mmenu_UserManage.setStyle("-fx-background-color: #98869E");
 			Mmenu_btnAccountInfo.setStyle(null);
 			Mmenu_MarkManage.setStyle(null);
@@ -434,7 +445,6 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		Mmenu_btnAccountInfo.setOnAction(e -> {
-//			if(!useing.getPermission().equalsIgnoreCase(anotherString))
 			DisableAllPane();
 			TTTK_pane.setDisable(false);
 			TTTK_pane.setVisible(true);
@@ -487,6 +497,18 @@ public class UICONTROLLER implements Initializable{
 			olistClass.add(sclass.getId());
 		}
 		
+	    ContextMenu TTSV_cmenu2 = new ContextMenu();
+	    MenuItem TTSV_ite21 = new MenuItem("Làm mới");
+	    TTSV_cmenu2.getItems().add(TTSV_ite21);
+	    TTSV_ite21.setOnAction(e -> {
+	    	TTSV_txtfID.setText("");
+			TTSV_txtfName.setText("");
+			TTSV_txtfEmail.setText("");
+			TTSV_txtfPhone.setText("");
+			TTSV_txtaAddress.setText("");
+	    });
+
+	    TTSV_btnAdd.setContextMenu(TTSV_cmenu2);
 	    
 	    MenuItem TTSV_ite1 = new MenuItem("Xóa sinh viên này");
 	    ContextMenu TTSV_cmenu = new ContextMenu();
@@ -793,6 +815,20 @@ public class UICONTROLLER implements Initializable{
 		}
 		
 		//---------Below is TTND button part----------//
+		
+		ContextMenu TTND_cmenu2 = new ContextMenu();
+	    MenuItem TTND_ite21 = new MenuItem("Làm mới");
+	    TTND_cmenu2.getItems().add(TTSV_ite21);
+	    TTND_ite21.setOnAction(e -> {
+	    	TTND_txtfID.setText("");
+			TTND_txtfName.setText("");
+			TTND_txtfEmail.setText("");
+			TTND_txtfPhone.setText("");
+			TTND_txtaAddress.setText("");
+	    });
+
+	    TTND_btnRefresh.setContextMenu(TTND_cmenu2);
+		
 		ContextMenu TTND_cmenu = new ContextMenu();
 		MenuItem TTND_mtmDelete = new MenuItem("Xóa người dùng này");
 		MenuItem TTND_mtmReset = new MenuItem("Thiết lập lại mật khẩu cho người này");
