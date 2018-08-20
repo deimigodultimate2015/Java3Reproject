@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -207,7 +208,7 @@
                   <ComboBox fx:id="TTSV_cboxClass" layoutX="167.0" layoutY="304.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
                </children>
             </Pane>
-            <Pane fx:id="DSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
+            <Pane fx:id="DSV_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
                <children>
                   <TextField fx:id="DSV_txtfID" layoutX="150.0" layoutY="98.0" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="25.0" layoutY="99.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #564B6F;" text="ID Sinh viên" textFill="WHITE">
@@ -373,7 +374,7 @@
                   <ComboBox fx:id="TTND_cboxRole" layoutX="167.0" layoutY="199.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0 0 1 0;" />
                </children>
             </Pane>
-            <Pane fx:id="TTTK_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
+            <Pane fx:id="TTTK_pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0">
                <children>
                   <TextField fx:id="TTTK_txtfID" layoutX="167.0" layoutY="124.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Người dùng" textFill="WHITE">
@@ -439,19 +440,16 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="TTTK_txtfOldPass" layoutX="703.0" layoutY="123.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="553.0" layoutY="124.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Mật khẩu cũ" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TTTK_txtfNewPass" layoutX="703.0" layoutY="173.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="553.0" layoutY="174.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Mật khẩu mới" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="TTTK_txtfReNewPass" layoutX="703.0" layoutY="223.0" prefHeight="26.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="553.0" layoutY="224.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Re - Mật khẩu mới" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
@@ -464,6 +462,9 @@
                   <Label fx:id="TTTK_lblOldPassE" alignment="CENTER" layoutX="553.0" layoutY="150.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTTK_lblRePassE" alignment="CENTER" layoutX="553.0" layoutY="250.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <ComboBox fx:id="TTTK_cboxRole" layoutX="167.0" layoutY="224.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
+                  <PasswordField layoutX="703.0" layoutY="123.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
+                  <PasswordField fx:id="TTTK_txtfNewPass" layoutX="703.0" layoutY="173.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
+                  <PasswordField fx:id="TTTK_txtfReNewPass" layoutX="702.0" layoutY="223.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
                </children>
             </Pane>
          </children>

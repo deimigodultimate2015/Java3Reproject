@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import model.DBUtils;
 import model.User;
 import view.UI1M;
 
@@ -31,6 +32,25 @@ public class UISIGNIN implements Initializable{
 	private static Scene scene;
 	private static Stage stage;
 	
+	private static Scene scene1;
+	private static Stage stage1;
+	
+	public static Scene getScene1() {
+		return scene1;
+	}
+
+	public static void setScene1(Scene scene1) {
+		UISIGNIN.scene1 = scene1;
+	}
+
+	public static Stage getStage1() {
+		return stage1;
+	}
+
+	public static void setStage1(Stage stage1) {
+		UISIGNIN.stage1 = stage1;
+	}
+
 	public static Stage getStage() {
 		return stage;
 	}
@@ -70,6 +90,9 @@ public class UISIGNIN implements Initializable{
 
     @FXML
     private Hyperlink lnkHelp;
+    
+    @FXML
+    private Hyperlink lnkHelp1;
 
     private static User useing ; 
     
@@ -117,12 +140,40 @@ public class UISIGNIN implements Initializable{
 			scaleTransition.play();
 		});
 		
+		lnkHelp1.setOnAction(e -> {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/view/DBFXML.fxml"));
+				scene1 = new Scene(root);
+				Stage stage = new Stage();
+				root.setOnMousePressed(ex -> {
+					yOffset = ex.getSceneY();
+					xOffset = ex.getSceneX();
+				});
+				
+				root.setOnMouseDragged(ez -> {
+					stage.setX(ez.getScreenX() - xOffset);
+					stage.setY(ez.getScreenY() - yOffset);
+				});
+				stage.initStyle(StageStyle.UNDECORATED);
+				stage.setScene(scene1);
+				stage.show();
+//				UI1M.getStage().hide();
+			} catch (Exception ex) {
+				System.out.println(ex);
+			}
+		});
+		
 		btnSignin.setOnAction( ez-> {
 			lblFail.setVisible(false);
 			if(chkboxRemember.isSelected()) {
 				RememberMe.rememberThis(txtfUsername.getText(), txtfPassword.getText());
 			} else {
 				RememberMe.dontRememberThis();
+			}
+			
+			if(DBUtils.isItEmpty()) {
+				lnkHelp1.fire();
+				return;
 			}
 			
 			if(CheckLogin.isThisAccountExist(txtfUsername.getText(),txtfPassword.getText()) != null) {

@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import controller.signin.UISIGNIN;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -96,8 +96,19 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TableColumn<Student, String> TTSV_clmClass;
+    
+    @FXML
+    private Button TTSV_btnFirst;
 
-  
+    @FXML
+    private Button TTSV_btnPrev;
+
+    @FXML
+    private Button TTSV_btnNext;
+
+    @FXML
+    private Button TTSV_btnLast;
+
     @FXML
     private Circle TTSV_ava;
 
@@ -166,8 +177,18 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TableColumn<Student, String> DSV_clmName;
-
     
+    @FXML
+    private Button DSV_btnFirst;
+
+    @FXML
+    private Button DSV_btnLast;
+
+    @FXML
+    private Button DSV_btnNext;
+
+    @FXML
+    private Button DSV_btnPrev;
 
     @FXML
     private Label DSV_lblNameE;
@@ -213,6 +234,18 @@ public class UICONTROLLER implements Initializable{
 
     @FXML
     private TableColumn<User, String> TTND_clmEmail;
+    
+    @FXML
+    private Button TTND_btnFIrst;
+
+    @FXML
+    private Button TTND_btnPrev;
+
+    @FXML
+    private Button TTND_btnNext;
+
+    @FXML
+    private Button TTND_btnLast;
     
     @FXML
     private TextField TTSV_txtfFilter;
@@ -299,13 +332,13 @@ public class UICONTROLLER implements Initializable{
     private Label TTTK_lblRoleE;
 
     @FXML
-    private TextField TTTK_txtfOldPass;
+    private PasswordField TTTK_txtfOldPass;
 
     @FXML
-    private TextField TTTK_txtfNewPass;
+    private PasswordField TTTK_txtfNewPass;
 
     @FXML
-    private TextField TTTK_txtfReNewPass;
+    private PasswordField TTTK_txtfReNewPass;
 
     @FXML
     private Button TTTK_btnUpdatePass;
@@ -465,6 +498,8 @@ public class UICONTROLLER implements Initializable{
 		TTSV_tbl.setItems(FXCollections.observableArrayList(olistTTSV));
 		
 		letFilter(TTSV_tbl, TTSV_txtfFilter);
+		TTSV_tbl.getSelectionModel().select(0);
+		TTSV_selectByNow();
 		
 		TTSV_btnAdd.setOnAction(e -> {
 			TTSV_lblNameE.setText("");
@@ -489,6 +524,8 @@ public class UICONTROLLER implements Initializable{
 			TTSV_tbl.setItems(olistTTSV);
 			TTSV_tbl.refresh();
 			letFilter(TTSV_tbl, DSV_txtfFilter);
+			TTSV_tbl.getSelectionModel().select(0);
+			TTSV_selectByNow();
 		});
 		
 		TTSV_btnUpdate.setOnAction(e -> {
@@ -513,6 +550,8 @@ public class UICONTROLLER implements Initializable{
 			TTSV_tbl.setItems(olistTTSV);
 			TTSV_tbl.refresh();
 			letFilter(TTSV_tbl, DSV_txtfFilter);
+			TTSV_tbl.getSelectionModel().select(0);
+			TTSV_selectByNow();
 		});
 		
 		TTSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
@@ -520,7 +559,6 @@ public class UICONTROLLER implements Initializable{
 			@Override
 			public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
 				if(newValue!= null) {
-					System.out.println("This from clicked "+newValue.getImage());
 					TTSV_txtfID.setText(newValue.getId());
 					TTSV_txtfName.setText(newValue.getName());
 					TTSV_cboxClass.getSelectionModel().select(newValue.getClassId());
@@ -539,7 +577,38 @@ public class UICONTROLLER implements Initializable{
 			
 		});
 		
+		TTSV_btnFirst.setOnAction(e->{
+			TTSV_tbl.getSelectionModel().select(0);
+			TTSV_selectByNow();
+		});
+		
+		TTSV_btnLast.setOnAction(e -> {
+			TTSV_tbl.getSelectionModel().select(TTSV_tbl.getItems().size()-1);
+			TTSV_selectByNow();
+		});
+		
+		TTSV_btnNext.setOnAction(e -> {
+			if(TTSV_tbl.getSelectionModel().getSelectedIndex() + 1 > TTSV_tbl.getItems().size()-1) {
+				TTSV_tbl.getSelectionModel().select(TTSV_tbl.getItems().size()-1);
+				TTSV_selectByNow();
+			} else {
+				TTSV_tbl.getSelectionModel().select(TTSV_tbl.getSelectionModel().getSelectedIndex()+1);
+				TTSV_selectByNow();
+			}
+		});
+		
+		TTSV_btnPrev.setOnAction(e -> {
+			if(TTSV_tbl.getSelectionModel().getSelectedIndex() - 1 < 0) {
+				TTSV_tbl.getSelectionModel().select(0);
+				TTSV_selectByNow();
+			} else {
+				TTSV_tbl.getSelectionModel().select(TTSV_tbl.getSelectionModel().getSelectedIndex()-1);
+				TTSV_selectByNow();
+			}
+		});
+		
 		//--------------------Below is TTTK button part----------------------------//
+		TTTK_cboxRole.setEditable(false);
 		TTTK_txtfID.setEditable(false);
 		TTTK_txtfID.setText(useing.getId());
 		TTTK_txtfName.setText(useing.getName());
@@ -550,7 +619,6 @@ public class UICONTROLLER implements Initializable{
 		TTTK_txtaAddress.setText(useing.getAddress());
 		
 		TTTK_btnRefresh.setOnAction(e -> {
-			TTTK_txtfID.setText("");
 			TTTK_txtfName.setText("");
 			TTTK_txtfEmail.setText("");
 			TTTK_txtfPhone.setText("");
@@ -590,7 +658,6 @@ public class UICONTROLLER implements Initializable{
 			User user = new User(TTTK_txtfID.getText(), useing.getPassword(), TTTK_txtfName.getText(), TTTK_rdbtnFemale.isSelected()?true:false , TTTK_txtfEmail.getText(), TTTK_txtfPhone.getText(),TTTK_txtaAddress.getText(), useing.getPermission(), useing.getImage());
 			useing = user;
 			UserModel.update(user);
-			
 		});
 		
 		TTTK_btnUpdatePass.setOnAction(e -> {
@@ -619,6 +686,8 @@ public class UICONTROLLER implements Initializable{
 			useing = user;
 			UserModel.update(user);
 		});
+		
+		
 		//---------Below is Main Menu button----------//
 		Mmenu_btnChangeAvt.setOnMouseEntered(e -> {
 			Image img = new Image(getClass().getResourceAsStream("tenor.png"));
@@ -644,12 +713,16 @@ public class UICONTROLLER implements Initializable{
 		}
 		
 		//---------Below is TTND button part----------//
+		
 		TTND_txtfID.setEditable(false);
 		TTND_cboxRole.setEditable(false);
 		TTND_tbl.setItems(olistTTND);
 		TTND_clmID.setCellValueFactory(new PropertyValueFactory<User, String>("id"));
 		TTND_clmName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
 		TTND_clmEmail.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+		TTND_tbl.getSelectionModel().select(0);
+		TTND_selectByNow();
+		
 		letFilterUser(TTND_tbl, TTND_txtfFilter);
 		TTND_btnUpdate.setOnAction(e -> {
 			TTND_lblIDE.setText("");
@@ -679,7 +752,6 @@ public class UICONTROLLER implements Initializable{
 					TTND_txtfID.setText(newValue.getId());
 					TTND_txtfName.setText(newValue.getName());
 					TTND_cboxRole.getSelectionModel().select(newValue.getPermission());
-//					TTND_cboxClass.getSelectionModel().select(newValue.get);
 					TTND_txtfEmail.setText(newValue.getEmail());
 					TTND_txtfPhone.setText(newValue.getPhoneNumber());
 					TTND_txtaAddress.setText(newValue.getAddress());
@@ -704,7 +776,38 @@ public class UICONTROLLER implements Initializable{
 			TTND_tbl.setItems(olistTTND);
 			TTND_tbl.refresh();
 			letFilterUser(TTND_tbl, TTND_txtfFilter);
-			
+			TTND_tbl.getSelectionModel().select(0);
+			TTND_selectByNow();
+		});
+		
+		TTND_btnFIrst.setOnAction(e->{
+			TTND_tbl.getSelectionModel().select(0);
+			TTND_selectByNow();
+		});
+		
+		TTND_btnLast.setOnAction(e -> {
+			TTND_tbl.getSelectionModel().select(TTND_tbl.getItems().size()-1);
+			TTND_selectByNow();
+		});
+		
+		TTND_btnNext.setOnAction(e -> {
+			if(TTND_tbl.getSelectionModel().getSelectedIndex() + 1 > TTND_tbl.getItems().size()-1) {
+				TTND_tbl.getSelectionModel().select(TTND_tbl.getItems().size()-1);
+				TTND_selectByNow();
+			} else {
+				TTND_tbl.getSelectionModel().select(TTND_tbl.getSelectionModel().getSelectedIndex()+1);
+				TTND_selectByNow();
+			}
+		});
+		
+		TTND_btnPrev.setOnAction(e -> {
+			if(TTND_tbl.getSelectionModel().getSelectedIndex() - 1 < 0) {
+				TTND_tbl.getSelectionModel().select(0);
+				TTND_selectByNow();
+			} else {
+				TTND_tbl.getSelectionModel().select(TTND_tbl.getSelectionModel().getSelectedIndex()-1);
+				TTND_selectByNow();
+			}
 		});
 		
 		//-------Below is DSV button part----------//
@@ -714,28 +817,43 @@ public class UICONTROLLER implements Initializable{
 		DSV_clmName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
 		DSV_clmTB.setCellValueFactory(new PropertyValueFactory<Student, String>("average"));
 		DSV_tbl.setItems( FXCollections.observableArrayList(olistTTSV));
+		DSV_tbl.getSelectionModel().select(0);
+		DSV_selectByNow();
+		
 		letFilter(DSV_tbl, DSV_txtfFilter);
 		DSV_btnUpdate.setOnAction(e -> {
 			DSV_lblNameE.setText("");
 			DSV_lblJSE.setText("");
 			DSV_lblJavaE.setText("");
 			DSV_lblGolangE.setText("");
-			if(Float.parseFloat(DSV_txtfJS.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
+			if(!DSV_txtfJS.getText().matches("[0-9]*\\.[0-9]*")) {
+				DSV_lblJSE.setText("Điểm không đúng định dạng, vd : 00.00, 10.0");
+				return;
+			} else if(!DSV_txtfJava.getText().matches("[0-9]*\\.[0-9]*")) {
+				DSV_lblJavaE.setText("Điểm không đúng định dạng, vd : 00.00, 10.0");
+				return;
+			} else if(!DSV_txtfGo.getText().matches("[0-9]*\\.+[0-9]*")) {
+				DSV_lblGolangE.setText("Điểm không đúng định dạng, vd : 00.00, 10.0, 10, 9");
+				return;
+			} else if(Float.parseFloat(DSV_txtfJS.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
 				DSV_lblJSE.setText("Điểm phải nằm trong khoảng 0 - 10");
 				return;
-			} else if(Float.parseFloat(DSV_txtfJava.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
+			} else if(Float.parseFloat(DSV_txtfJava.getText()) < 0 || Float.parseFloat(DSV_txtfJava.getText()) > 10) {
 				DSV_lblJavaE.setText("Điểm phải nằm trong khoảng 0 - 10");
 				return;
-			} else if(Float.parseFloat(DSV_txtfGo.getText()) < 0 || Float.parseFloat(DSV_txtfJS.getText()) > 10) {
+			} else if(Float.parseFloat(DSV_txtfGo.getText()) < 0 || Float.parseFloat(DSV_txtfGo.getText()) > 10) {
 				DSV_lblGolangE.setText("Điểm phải nằm trong khoảng 0 - 10");
 				return;
-			} 
+			}
+			
 			StudentModel.updateMarks(DSV_txtfID.getText(), Float.parseFloat(DSV_txtfJava.getText()), Float.parseFloat(DSV_txtfJS.getText()), Float.parseFloat(DSV_txtfGo.getText()));
 			DSV_lblAve.setText(String.format("%.02f", (Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3));
 			olistTTSV = FXCollections.observableArrayList(StudentModel.getAll());
 			DSV_tbl.setItems(olistTTSV);
 			DSV_tbl.refresh();
 			letFilter(DSV_tbl, DSV_txtfFilter);
+			DSV_tbl.getSelectionModel().select(0);
+			DSV_selectByNow();
 		});	
 		
 		DSV_tbl.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
@@ -754,6 +872,35 @@ public class UICONTROLLER implements Initializable{
 			
 		});
 		
+		DSV_btnFirst.setOnAction(e->{
+			DSV_tbl.getSelectionModel().select(0);
+			DSV_selectByNow();
+		});
+		
+		DSV_btnLast.setOnAction(e -> {
+			DSV_tbl.getSelectionModel().select(DSV_tbl.getItems().size()-1);
+			DSV_selectByNow();
+		});
+		
+		DSV_btnNext.setOnAction(e -> {
+			if(DSV_tbl.getSelectionModel().getSelectedIndex() + 1 > DSV_tbl.getItems().size()-1) {
+				DSV_tbl.getSelectionModel().select(DSV_tbl.getItems().size()-1);
+				DSV_selectByNow();
+			} else {
+				DSV_tbl.getSelectionModel().select(DSV_tbl.getSelectionModel().getSelectedIndex()+1);
+				DSV_selectByNow();
+			}
+		});
+		
+		DSV_btnPrev.setOnAction(e -> {
+			if(DSV_tbl.getSelectionModel().getSelectedIndex() - 1 < 0) {
+				DSV_tbl.getSelectionModel().select(0);
+				DSV_selectByNow();
+			} else {
+				DSV_tbl.getSelectionModel().select(DSV_tbl.getSelectionModel().getSelectedIndex()-1);
+				DSV_selectByNow();
+			}
+		});
 		
 		
 	}
@@ -825,5 +972,44 @@ public class UICONTROLLER implements Initializable{
 		tbl.setItems(srtListTTSV);
 		
 	}
+	
+	public void TTND_selectByNow() {
+		User newValue = TTND_tbl.getSelectionModel().getSelectedItem();
+		TTND_txtfID.setText(newValue.getId());
+		TTND_txtfName.setText(newValue.getName());
+		TTND_cboxRole.getSelectionModel().select(newValue.getPermission());
+		TTND_txtfEmail.setText(newValue.getEmail());
+		TTND_txtfPhone.setText(newValue.getPhoneNumber());
+		TTND_txtaAddress.setText(newValue.getAddress());
+		if(newValue.getSex()) TTND_rdbtnMale.setSelected(true); else TTND_rdbtnFemale.setSelected(true);
+	}
+	
+	public void TTSV_selectByNow() {
+		Student newValue = TTSV_tbl.getSelectionModel().getSelectedItem();
+		TTSV_txtfID.setText(newValue.getId());
+		TTSV_txtfName.setText(newValue.getName());
+		TTSV_cboxClass.getSelectionModel().select(newValue.getClassId());
+		TTSV_txtfEmail.setText(newValue.getEmail());
+		TTSV_txtfPhone.setText(newValue.getPhoneNumber());
+		TTSV_txtaAddress.setText(newValue.getAddress());
+		if(newValue.getSex()) TTSV_rdbtnMale.setSelected(true); else TTSV_rdbtnFemale.setSelected(true);
+		try {
+			TTSV_ava.setFill(new ImagePattern(SetImgForCircle.getImageWithPath(newValue.getImage())));
+		} catch(Exception ex) {
+			TTSV_ava.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("notfound.png"))));
+		}
+
+	}
+	
+	public void DSV_selectByNow() {
+		Student newValue = TTSV_tbl.getSelectionModel().getSelectedItem();
+		DSV_txtfID.setText(newValue.getId());
+		DSV_txtfName.setText(newValue.getName());
+		DSV_txtfJava.setText(newValue.getJava()+"");
+		DSV_txtfJS.setText(newValue.getJavascript()+"");
+		DSV_txtfGo.setText(newValue.getGolang()+"");
+		DSV_lblAve.setText(String.format("%.02f", (Float.parseFloat(DSV_txtfJava.getText())+Float.parseFloat(DSV_txtfJS.getText())+Float.parseFloat(DSV_txtfGo.getText()))/3));
+	}
+	
 
 }
