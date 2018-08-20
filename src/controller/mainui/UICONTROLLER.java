@@ -789,7 +789,7 @@ public class UICONTROLLER implements Initializable{
 			User user = new User(useing.getId(), TTTK_txtfReNewPass.getText(),useing.getName(), useing.getSex(), useing.getEmail(), useing.getPhoneNumber(), useing.getAddress(), useing.getPermission(), useing.getImage());
 			useing = user;
 			UserModel.update(user);
-			TTTK_btnRefresh.fire();
+			TTTK_btnNewPass.fire();
 			Alert alr = new Alert(AlertType.INFORMATION);
 			alr.setTitle("Cập nhật mật khẩu tài khoản");
 			alr.setHeaderText("Cập nhật mật khẩu tài khoản thành công");

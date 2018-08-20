@@ -292,7 +292,7 @@
             <Pane fx:id="TTND_Pane" layoutY="41.0" prefHeight="635.0" prefWidth="1056.0" visible="false">
                <children>
                   <TextField fx:id="TTND_txtfName" layoutX="167.0" layoutY="149.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
-                  <Label alignment="CENTER" layoutX="17.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Họ à tên" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="17.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="Họ và tên" textFill="WHITE">
                      <padding>
                         <Insets bottom="2.0" />
                      </padding>
@@ -356,12 +356,12 @@
                   <Label alignment="CENTER" layoutX="17.0" layoutY="275.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTND_lblPhoneE" alignment="CENTER" layoutX="20.0" layoutY="327.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <TextArea fx:id="TTND_txtaAddress" layoutX="167.0" layoutY="393.0" prefHeight="14.0" prefWidth="200.0" stylesheets="@UI1CSS.css" />
-                  <RadioButton fx:id="TTND_rdbtnFemale" layoutX="174.0" layoutY="356.0" mnemonicParsing="false" text="Female">
+                  <RadioButton fx:id="TTND_rdbtnFemale" layoutX="174.0" layoutY="356.0" mnemonicParsing="false" text="Nữ">
                      <toggleGroup>
                         <ToggleGroup fx:id="TTND_tgroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="TTND_rdbtnMale" layoutX="250.0" layoutY="356.0" mnemonicParsing="false" text="Not Female" toggleGroup="$TTND_tgroup" />
+                  <RadioButton fx:id="TTND_rdbtnMale" layoutX="250.0" layoutY="356.0" mnemonicParsing="false" text="Nam" toggleGroup="$TTND_tgroup" />
                   <TextField fx:id="TTND_txtfID" layoutX="167.0" layoutY="99.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #564B6F;" />
                   <Label alignment="CENTER" layoutX="17.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #564B6F;" text="ID Người dùng" textFill="WHITE">
                      <padding>
