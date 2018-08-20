@@ -428,6 +428,7 @@ public class UICONTROLLER implements Initializable{
 		});
 		
 		Mmenu_btnAccountInfo.setOnAction(e -> {
+//			if(!useing.getPermission().)
 			DisableAllPane();
 			TTTK_pane.setDisable(false);
 			TTTK_pane.setVisible(true);

@@ -462,7 +462,7 @@
                   <Label fx:id="TTTK_lblOldPassE" alignment="CENTER" layoutX="553.0" layoutY="150.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <Label fx:id="TTTK_lblRePassE" alignment="CENTER" layoutX="553.0" layoutY="250.0" prefHeight="17.0" prefWidth="324.0" textFill="#ff2323" />
                   <ComboBox fx:id="TTTK_cboxRole" layoutX="167.0" layoutY="224.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
-                  <PasswordField layoutX="703.0" layoutY="123.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
+                  <PasswordField fx:id="TTTK_txtfOldPass" layoutX="703.0" layoutY="123.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
                   <PasswordField fx:id="TTTK_txtfNewPass" layoutX="703.0" layoutY="173.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
                   <PasswordField fx:id="TTTK_txtfReNewPass" layoutX="702.0" layoutY="223.0" prefHeight="24.0" prefWidth="340.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-border-color: #212121;" />
                </children>
